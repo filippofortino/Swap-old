@@ -1,6 +1,6 @@
 <?php
 	
-require_once 'dir.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
 
 // Run the recursive function 
 
