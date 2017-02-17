@@ -27,7 +27,7 @@
 	require_once 'assets/includes/SimpleImage.php';
 
 	// Store user alerts
-	$feedback = "";
+	//$feedback = "";
 
 	if(isset($_FILES['upl'])){
 
