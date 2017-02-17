@@ -13,6 +13,7 @@
 	
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/upload.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/auth.php';
 
 	// Disable browser cache
 	header("Cache-Control: no-cache, must-revalidate");
