@@ -13,7 +13,9 @@
 	
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/upload.php';
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/auth.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/Authentication.class.php';
+	
+	$auth = new Authentication();
 
 	// Disable browser cache
 	header("Cache-Control: no-cache, must-revalidate");
@@ -73,7 +75,12 @@
 		</header>
 
 		<div class="breadcrumbs"></div>
-		<?php if(isset($feedback)) echo $feedback; ?>
+		<?php 
+			if(isset($feedback)) echo $feedback;
+			if($auth->getLoginStatus()) 
+				echo "Bentronato " . $_SESSION['username'];
+			
+		?>
 		<div id="content">
 			<aside>
 				<input type="checkbox" id="upload" />
