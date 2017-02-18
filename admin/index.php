@@ -9,6 +9,8 @@
 		echo password_hash($password, PASSWORD_DEFAULT);
 	}
 	
+	if($auth->getLoginStatus())	header('Location: /swap/#Home');
+	
 ?>
 <html>
 	<head>
