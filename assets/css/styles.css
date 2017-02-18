@@ -491,6 +491,20 @@ button {
 	top: 85px;
 }
 
+.filemanager .data li .delete {
+	display: none;
+}
+.filemanager .data.loggedin li .delete {
+	display: block;
+	position: absolute;
+	top: 7px;
+	right: 7px;
+}
+.filemanager .data.loggedin li .delete a {
+	font-size: 1.1em;
+	color: #e74c3c;
+}
+
 .filemanager .nothingfound {
 	/*background-color: #373743;*/
 	background-color: #ecf0f1;
@@ -552,10 +566,9 @@ button {
 	right: -10px;
 }
 
-#upload-form {
+.nav-form {
 	background-color: #ecf0f1;
 	position: absolute;
-	right: 0;
 	margin-top: 48px;
 	padding: 0 7px;
 	border-radius: 5px;
@@ -564,12 +577,10 @@ button {
 	z-index: 10;
 	display: none;
 }
-#upload-form:before {
+.nav-form:before {
 	content: '';
 	display: block;
 	position: relative;
-	left: 190px;
-	bottom: 10px;
 	width: 0; 
 	height: 0; 
 	border-left: 15px solid transparent;
@@ -577,6 +588,34 @@ button {
 	
 	border-bottom: 20px solid  #ecf0f1;
 }
+
+/** Singe Form **/
+#upload-form {
+	right: 0;
+}
+#upload-form:before {
+	left: 190px;
+	bottom: 10px;
+}
+#folder-form {
+	padding: 0 15px;
+	right: 120px;
+}
+#folder-form:before {
+	left: 125px;
+	bottom: 10px;
+}
+#recursive-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	font-size: .7em;
+}
+#recursive-wrapper label {
+	margin-right: 5px;
+}
+
 .filemanager #upload-form input[type=file] {
 	font-family: 'lovelo';
 	color: transparent;
@@ -607,9 +646,10 @@ button {
 	color: #e7045a;
 	background-color: rgba(232, 4, 92, 0.1);
 }
-.filemanager #upload-button {
+.filemanager .nav-button {
 	color: #074d7b;
 	text-align: center;
+	margin-left: 10px;
 	padding: 9px 12px;
 	border: 2px solid #074d7b;
 	border-radius: 5px;
@@ -618,12 +658,13 @@ button {
 	transition: all .6s;
 	-webkit-transition: all .6s;
 }
-.filemanager #upload-button:hover, #upload:checked ~ #upload-button {
+.filemanager .nav-button:hover, 
+#upload:checked ~ #upload-button {
 	border-color: #fff;
 	color: #fff;
 	background-color: rgba(255,255,255,0.1);
 }
-.filemanager #upload-button i {
+.filemanager .nav-button i {
 	margin-right: 5px;
 }
 .filemanager #upload-form #files-list {
@@ -637,10 +678,9 @@ button {
 .filemanager #upload-form #files-list li span {
 	color: #e7045a;
 }
-.filemanager #upload-form input[type=submit] {
+.filemanager .nav-form input[type=submit] {
 	font-family: 'lovelo';
 	font-size: .9em;
-	display: none;
 	color: #e7045a;
 	background-color: transparent;
 	width: 155px;
@@ -654,7 +694,33 @@ button {
 	-webkit-transition: all .6s;
 	-webkit-appearance: none;
 }
-.filemanager #upload-form input[type=submit]:hover {
+.filemanager #upload-form input[type=submit] {
+	display: none;
+}
+.filemanager #folder-form input[type=submit] {
+	display: block;
+}
+.filemanager #folder-form #foldername {
+	font-family: 'lovelo';
+	outline: none;
+	color: #ee9b35;
+	width: 155px;
+	padding: 7px 10px;
+	border: 2px solid #ee9b35;
+	border-radius: 5px;
+	font-size: .7em;
+	margin: 0 auto;
+	outline: none;
+	transition: all .6s;
+	-webkit-transition: all .6s;
+	-webkit-appearance: none;
+}
+.filemanager #folder-form #foldername:focus {
+	border-color: #e7045a;
+	color: #e7045a;
+}
+
+.filemanager .nav-form input[type=submit]:hover {
 	border-color: #ee9b35;
 	color: #ee9b35;
 	background-color: rgba(238, 155, 53, 0.1);
@@ -674,10 +740,14 @@ button {
 .filemanager p.success {
 	background-color: #27ae60;
 }
-.filemanager #upload {
+.filemanager #upload,
+.filemanager #folder {
 	display: none;
 }
 #upload:checked ~ #upload-form {
+	display: block;
+}
+#folder:checked ~ #folder-form {
 	display: block;
 }
 
@@ -1134,4 +1204,7 @@ footer p a {
 }
 footer p a:hover {
 	color: #e7045a;
+}
+footer p span:last-child {
+	float: right;
 }
