@@ -121,6 +121,14 @@
 					$_SESSION['user_is_logged_in'] = true;
 					$_SESSION['last_activity'] = time();
 					$this->user_is_logged_in = true;
+					
+					// Insert last login date into the database
+/*
+					$sql = "UPDATE swp_user SET last_login = " . time() . " WHERE username = $user";
+					if(!$result = $this->db->query($sql))
+						$this->feedback = 'There was an error running the query ' . $this->db->error;
+*/
+					
 				} else
 					$this->feedback = "La password inserita non è corretta.";
 			else 
