@@ -1,5 +1,5 @@
 $(function(){
-
+	
 	var filemanager = $('.filemanager'),
 		breadcrumbs = $('.breadcrumbs'),
 		fileList = filemanager.find('.data');
@@ -9,6 +9,7 @@ $(function(){
 	
 	// Skick Breadcrumbs to top on scroll
     $(".breadcrumbs").stick_in_parent();
+    
     
     // Show search box on keypress
     var searchBox = $('input[type=search]');
@@ -20,6 +21,18 @@ $(function(){
 	Mousetrap.bind('s r c', function() { setTimeout(function() { searchBox.focus(); }, 1); });
 	Mousetrap.bind('s e a r c h', function() { setTimeout(function() { searchBox.focus(); }, 1); });
 	Mousetrap.bind('c e r c a', function() { setTimeout(function() { searchBox.focus(); }, 1); });
+	
+	// Allowing checkboxes to act like radio buttons
+	$("input:checkbox").on('click', function() {
+		var $box = $(this);
+		if ($box.is(":checked")) {
+	    	var group = "input:checkbox[name='" + $box.attr("name") + "']";
+	    	$(group).prop("checked", false);
+			$box.prop("checked", true);
+	  	} else {
+	    	$box.prop("checked", false);
+		}
+	});
 	
 	// Add files names to upload list
 	$("#file-uploader").change(function() {
@@ -93,7 +106,7 @@ $(function(){
 		// We are using the "input" event which detects cut and paste
 		// in addition to keyboard input.
 
-		filemanager.find('input').on('input', function(e){
+		filemanager.find("input[type='search']").on('input', function(e){
 
 			folders = [];
 			files = [];
@@ -193,7 +206,7 @@ $(function(){
 			hash = decodeURIComponent(hash).slice(1).split('=');
 			
 			$('.button').attr("href", hash);
-			$('#dir').attr("value", hash);
+			$('.dir').attr("value", hash);
 			
 			if (hash.length) {
 				var rendered = '';
@@ -398,7 +411,7 @@ $(function(){
 						icon = '<img class="icon img-preview" src="https://fortelli.it/swap/images/compressed/'+compressed_path+'" alt='+name+'>';
 					else
 						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					var file = $('<li class="files"><div class="files">'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span><span class="links"><a href="'+f.path+'" title="'+ f.path +'" target="_blank" class="viewfile">Visualizza</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></div></li>');
+					var file = $('<li class="files"><div class="files"><span class="delete"><a href=?delete='+encodeURIComponent(f.path)+'&prev='+window.location.hash.slice(1)+'><i class="fa fa-trash-o"></i></a></span>'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span><span class="links"><a href="'+f.path+'" title="'+ f.path +'" target="_blank" class="viewfile">Visualizza</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></div></li>');
 					file.appendTo(fileList);
 				});
 
@@ -459,6 +472,11 @@ $(function(){
 			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
 			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 		}
+		
+		// Ask user confirmation before delete
+	    $('span.delete a').click(function(event) {
+		   if(!confirm("Sei sicuro di voler cancellare questo file?")) event.preventDefault(); 
+	    });
 		
 		//var pathname = $(location).attr('hash');
 		/*$('.button').attr("href", pathname);*/
