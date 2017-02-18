@@ -47,9 +47,9 @@
 			$prev = $_GET['prev'];
 			
 			if(!unlink($file))
-				$feedback = "<p class='alert error'>Errore. Impossibile eliminare il file.</p>";
+				$_SESSION['feedback'] = "<p class='alert error'>Errore. Impossibile eliminare il file.</p>";
 			else
-				$feedback = "<p class='alert success'>Il file è stato correttamente eliminato!</p>";
+				$_SESSION['feedback'] = "<p class='alert success'>Il file è stato correttamente eliminato!</p>";
 			
 			header("Location: /swap/#$prev");
 		} else
@@ -112,7 +112,7 @@
 		<div class="breadcrumbs"></div>
 		<?php 
 			if(isset($feedback)) echo $feedback;
-			
+			if(isset($_SESSION['feedback'])) { echo $_SESSION['feedback']; unset($_SESSION['feedback']); }
 		?>
 		<div id="content">
 			<aside>
