@@ -123,6 +123,7 @@
 					$this->user_is_logged_in = true;
 					
 					$stmt->free_result();
+					
 					// Insert last login date into the database
 					$stmt = $this->db->prepare("UPDATE swp_user SET last_login = CURRENT_TIMESTAMP WHERE username = ?");
 					$stmt->bind_param("s", $user);
