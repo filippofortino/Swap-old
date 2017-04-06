@@ -16,6 +16,9 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/Authentication.class.php';
 	
 	$auth = new Authentication();
+	
+	// Session user messages
+	$_SESSION['feedback'] = "";
 
 	// Disable browser cache
 	header("Cache-Control: no-cache, must-revalidate");
@@ -55,6 +58,8 @@
 		} else
 			$feedback = "<p class='alert error'>Errore. Non disponi dei permessi necessari per eseguire questa operazione</p>";
 	}
+	
+	//print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <html>
@@ -110,7 +115,7 @@
 		</header>
 
 		<div class="breadcrumbs"></div>
-		<?php 
+		<?php
 			if(isset($feedback)) echo $feedback;
 			if(isset($_SESSION['feedback'])) { echo $_SESSION['feedback']; unset($_SESSION['feedback']); }
 		?>
