@@ -17,7 +17,7 @@
 	$lockPlugin = new DAV\Locks\Plugin($lockBackend);
 	$server->addPlugin($lockPlugin);
 	
-	$pdo = new \PDO('mysql:host=' . HOST . 'dbname=' . DATABASE,USER,PASS);
+	$pdo = new \PDO('mysql:host=' . HOST . ';dbname=' . DATABASE,USER,PASS);
 	$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	$authBackend = new Auth\Backend\PDO($pdo);
 	$authBackend->setRealm('SabreDAV');
@@ -27,8 +27,7 @@
 	// This ensures that we get a pretty index in the browser, but it is
 	// optional.
 	$server->addPlugin(new DAV\Browser\Plugin());
-	
-	// All we need to do now, is to fire up the server
+
 	$server->exec();
 
 ?>
