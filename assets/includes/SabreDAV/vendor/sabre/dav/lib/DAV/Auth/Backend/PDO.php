@@ -23,7 +23,8 @@ class PDO extends AbstractDigest {
      *
      * @var string
      */
-    public $tableName = 'users';
+    //public $tableName = 'users'; Old Version
+    public $tableName = 'swp_user';
 
 
     /**
