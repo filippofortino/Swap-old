@@ -1,18 +1,14 @@
 <?php
 
 	use Sabre\DAV;
+	use Sabre\DAV\Auth;
 	
 	// The autoloader
-	require $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/SabreDAV/vendor/autoload.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/SabreDAV/vendor/autoload.php';
 	
-	// Now we're creating a whole bunch of objects
-	$rootDirectory = new DAV\FS\Directory('public');
-	
-	// The server object is responsible for making sense out of the WebDAV protocol
+	$rootDirectory = new DAV\FS\Directory('../Home');
 	$server = new DAV\Server($rootDirectory);
-	
-	// If your server is not on your webroot, make sure the following line has the
-	// correct information
 	$server->setBaseUri('/swap/webdav/server.php');
 	
 	// The lock manager is reponsible for making sure users don't overwrite
@@ -20,6 +16,13 @@
 	$lockBackend = new DAV\Locks\Backend\File('data/locks');
 	$lockPlugin = new DAV\Locks\Plugin($lockBackend);
 	$server->addPlugin($lockPlugin);
+	
+	$pdo = new \PDO('mysql:host=' . HOST . 'dbname=' . DATABASE,USER,PASS);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	$authBackend = new Auth\Backend\PDO($pdo);
+	$authBackend->setRealm('SabreDAV');
+	$authPlugin = new Auth\Plugin($authBackend);
+	$server->addPlugin($authPlugin);
 	
 	// This ensures that we get a pretty index in the browser, but it is
 	// optional.
