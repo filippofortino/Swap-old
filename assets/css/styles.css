@@ -412,7 +412,6 @@ button {
 	overflow: hidden;
 	padding: 0.3em;
 	z-index: 1;
-	cursor: pointer;
 	box-sizing: border-box;
 	-webkit-transition: all .4s ease-in-out;
 	transition: all .4s ease-in-out;
@@ -429,32 +428,32 @@ button {
 	cursor: default;
 }
 
-.filemanager .data li.folders a {
+.filemanager .data li.folders a.folders {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 }
-
-.filemanager .data li.files a {
+.filemanager .data li .links a {
 	font-size: .8em;
 	text-decoration: none;
 	-webkit-transition: color .4s ease;
 	transition: color .4s ease;
+	z-index: 100;
 }
 
-.filemanager .data li.files a.viewfile {
+.filemanager .data li .links a.viewfile {
 	color: #eb892f;
 }
-.filemanager .data li.files a.viewfile:hover {
+.filemanager .data li .links a.viewfile:hover {
 	color: #e7045a;
 }
 
-.filemanager .data li.files a.downloadfile {
+.filemanager .data li .links a.downloadfile {
 	color: #e7045a;
 }
-.filemanager .data li.files a.downloadfile:hover {
+.filemanager .data li .links a.downloadfile:hover {
 	color: #eb892f;
 }
 
