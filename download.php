@@ -28,11 +28,13 @@
 					if (is_dir($source)) {
 						$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 						foreach ($files as $file) {
-							$file = realpath($file);
-							if (is_dir($file)) {
-								$zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
-							} else if (is_file($file)) {
-								$zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+							if(basename($file) != '.' && basename($file) != '..') {
+								$file = realpath($file);
+								if (is_dir($file)) {
+									$zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+								} else if (is_file($file)) {
+									$zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+								}
 							}
 						}
 					} else if (is_file($source)) {
@@ -87,12 +89,28 @@
 		    exit;
 		}
 	} else {
-/*
 		$folder = $file;
-		echo bytesToSize(folderSize($folder));
-		if(zipData($folder, "archive/tmp/" . dirname($folder) . ".zip")) echo "Zipped!"; else echo "Unable to zip!";
+		if (substr($folder, 0, 4) == "Home" && file_exists($folder)) {
+			$zipped_file = "archive/tmp/" . basename($folder) . ".zip";
+			if(zipData($folder, $zipped_file)) {
+				header("Location: $zipped_file");
+/*
+				header('Content-Description: File Transfer');
+			    header('Content-Type: application/octet-stream');
+			    header('Content-Disposition: attachment; filename="'.basename($zipped_file).'"');
+			    header('Expires: 0');
+			    header('Cache-Control: must-revalidate');
+			    header('Pragma: public');
+			    header('Content-Length: ' . filesize($zipped_file));
+			    readfile($zipped_file); 
 */
-		$response = true;
+			    
+			    $response = true;
+			    exit;
+			} else {
+				echo "Unable to zip!";
+			}
+		}
 	}
 	
 	if(!$response) :
