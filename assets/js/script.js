@@ -160,10 +160,11 @@ $(function(){
 
 		// Clicking on folders
 
-		fileList.on('click', 'li.folders', function(e){
+		fileList.on('click', 'li.folders a.folders', function(e){
 			e.preventDefault();
 
-			var nextDir = $(this).find('a.folders').attr('href');
+// 			var nextDir = $(this).find('a.folders').attr('href');
+			var nextDir = $(this).attr('href');
 
 			if(filemanager.hasClass('searching')) {
 
@@ -377,7 +378,10 @@ $(function(){
 						itemsLength = 'Vuoto';
 					}
 
-					var folder = $('<li class="folders"><a href="'+ f.path +'" title="'+ f.path +'" class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></a></li>');
+					var folder = $('<li class="folders"><a href="'+ f.path +'" title="'+ f.path +'" class="folders"></a>'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span><span class="links"> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></li>');
+					
+// 					var folder = $('<li class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span><span class="links"><a href="'+f.path+'" title="'+ f.path +'" target="_blank" class="viewfile">Apri</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></li>');
+					
 					folder.appendTo(fileList);
 				});
 
