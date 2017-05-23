@@ -108,9 +108,15 @@
 				<a href="/swap/#<?php echo $dir; ?>"><img src="assets/img/swap_logo_web-small.png" /></a>
 				<p>Share your files, <span>in a snap!</span></p>
 			</div>
-			<div class="search">
-				<input type="search" placeholder="Cerca.." />
-				<button type="button"><i class="fa fa-search"></i></button>
+			<div id="header--side">
+				<div class="search">
+					<input type="search" placeholder="Cerca.." />
+					<button type="button"><i class="fa fa-search"></i></button>
+				</div>
+				
+				<div class="user--login">
+					<a href="admin/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a>
+				</div>
 			</div>
 		</header>
 
