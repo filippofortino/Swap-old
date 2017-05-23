@@ -82,6 +82,8 @@ header {
 	background-color: #fff;
 	padding: 5px 0;
 	position: relative;
+	display: flex;
+	justify-content: space-between;
 	z-index: 1000000;
 }
 header#paste {
@@ -136,6 +138,33 @@ header p span {
 	animation: 'textIntro_2' .8s 3s 1 both;
 	z-index: -2;
 }
+header #header--side {
+	display: inline-block;
+	padding-top: 5px;
+}
+
+/*-------------------------
+	User Login
+-------------------------*/
+header .user--login {
+	display: inline-block;
+	height: 60px;
+	margin: 0 15px 0 10px;
+/* 	background-color: red; */
+}
+header .user--login a {
+	font-size: 2.4em;
+	color: #e8581f;
+	-webkit-transition: color .4s;
+	transition: color .4s;
+}
+header .user--login a:hover {
+	color: #e72e34;
+}
+header .user--login a span {
+	font-size: .3em;
+	display: block;
+}
 
 /*-------------------------
 	Breadcrumbs
@@ -182,13 +211,12 @@ header p span {
 	Search box
 -------------------------*/
 .filemanager header .search {
-	margin: -50px 20px;
+/* 	margin: -50px 20px; */
+	position: relative;
+/* 	float: right; */
 	display: inline-block;
 	height: 60px;
-	position: relative;
-	float: right;
 	-webkit-appearance: none;
-	background-color: goldenrod;
 }
 .filemanager header .search [type="search"] {
   height: 60px;
@@ -203,7 +231,7 @@ header p span {
   padding-right: 60px;
   width: 0px;
   position: absolute;
-  top: -20px;
+/*   top: 10px; */
   right: 0;
   background: none;
   z-index: 3;
@@ -228,11 +256,11 @@ header p span {
   display: inline-block;
   background: none;
   font-size: 2.4em;
-  float: right;
+/*   float: right; */
   border: none;
   outline: none;
-  position: absolute;
-  margin-top: -20px;
+  position: absolute; 
+/*   margin-top: 10px; */
   right: 0;
   z-index: 2;
   cursor: pointer;
