@@ -381,6 +381,123 @@ button {
 	height: 200px;
 }
 
+/*******************
+	REGISTRATION
+*******************/
+div.authentication {
+	display: flex;
+	background-color: #fff;
+/* 	min-height: 70vh; */
+	border-radius: 3px;
+	padding: 45px 25px;
+	-webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
+	box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
+}
+div.authentication h1 {
+	font-size: 1.7em;
+	color: #7f8c8d;
+	margin-bottom: 50px;
+	
+}
+div.authentication #login {
+	flex-grow: 1;
+	padding-right: 25px;
+}
+div.authentication #registration {
+	flex-grow: 3;
+	padding-left: 25px;
+	border-left: 2px solid #ecf0f1;
+}
+div.authentication #form--register {
+	display: flex;
+}
+div.authentication #login form input, 
+div.authentication form label {
+		display: block;
+}
+div.authentication form input {
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	outline: none;
+	margin-bottom: 20px;
+	-webkit-appearance: none;
+	-webkit-transition: color .6s, background-color .6s, border .6s;
+	transition: color .6s, background-color .6s, border .6s;
+}
+div.authentication form input[type=text],
+div.authentication form input[type=password] {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: .9em;
+	border: 2px solid #ee9b35;
+	padding: 0 5px;
+	
+}
+
+div.authentication form input[type=text]:focus,
+div.authentication form input[type=password]:focus {
+	border: 2px solid #e7045a;
+}
+div.authentication form #input--submit {
+	font-family: 'lovelo', sans-serif;
+	font-size: .9em;
+	line-height: 25px;
+	border: 2px solid #e7045a;
+	background-color: transparent;
+	color: #e7045a;
+}
+div.authentication form #input--submit:hover {
+	border-color: #ee9b35;
+	color: #ee9b35;
+	background-color: rgba(238, 155, 53, 0.1);
+	cursor: pointer;
+}
+div.authentication form label {
+	font-size: .8em;
+	color: #b6c1c9;
+	margin-bottom: 5px;
+}
+div.authentication #login form input {
+	width: 300px;
+}
+div.authentication #registration form input {
+	width: 300px;
+}
+div.authentication #registration form #input--submit {
+	margin-left: 20px;
+	align-self: flex-end;
+	width: 150px;
+}
+div.authentication #registration #field-separator--left {
+	margin-right: 20px;
+}
+div.authentication .form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/** Error Box **/
+p.error-box {
+	padding: 10px 5px;
+	border: 2px solid #c0392b;
+	color: #c0392b;
+	margin-bottom: 20px;
+}
+p.success-box {
+	padding: 10px 5px;
+	border: 2px solid #2ecc71;
+	color: #2ecc71;
+	margin-bottom: 20px;
+}
+
+
+
+
+
+
+
 @media all and (max-width: 965px) {
 	.filemanager  #content {
 		margin: 30px auto 0;
