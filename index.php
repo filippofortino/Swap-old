@@ -76,15 +76,15 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	
 	<meta property="og:title" content="Swap - Share your files, in a snap!" />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://fortelli.it/swap/paste/" />
-		<meta property="og:description" content="Swap - Share your files, in a snap!" />
-		<meta property="og:image" content="https://www.fortelli.it/swap/assets/img/swap-s-logo-325x325png" />
-		<meta property="og:image:secure_url" content="https://www.fortelli.it/swap/assets/img/swap-s-logo-325x325.png" />
-		<meta property="og:image:type" content="image/png" />
-		<meta property="og:image:width" content="325" />
-		<meta property="og:image:height" content="325" />
-		<meta property="og:locale" content="it_IT" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://fortelli.it/swap/" />
+	<meta property="og:description" content="Swap - Share your files, in a snap!" />
+	<meta property="og:image" content="https://www.fortelli.it/swap/assets/img/swap-s-logo-325x325png" />
+	<meta property="og:image:secure_url" content="https://www.fortelli.it/swap/assets/img/swap-s-logo-325x325.png" />
+	<meta property="og:image:type" content="image/png" />
+	<meta property="og:image:width" content="325" />
+	<meta property="og:image:height" content="325" />
+	<meta property="og:locale" content="it_IT" />
 
 	<title>Swap - Share your files, in a snap!</title>
 
