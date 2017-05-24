@@ -1,0 +1,73 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="sans-serif" font-size="16px" color="#626262" />
+      <mj-button background-color="#F45E43" color="#fff" font-size="14px" />
+    </mj-attributes>
+    <mj-style>
+      .heading { padding-top: 0px; text-align: center; font-size: 45px; font-family: "lovelo"; color: #fff; line-height: 45px } .background { background-color: red; }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-container background-color="#ecf0f1">
+
+
+      <!-- Header -->
+      <mj-section background-color="#fff">
+        <mj-column>
+
+
+          <mj-image src="https://fortelli.it/swap/assets/img/swap_logo_web_complete.png" width="220" align="left" href="#" />
+
+        </mj-column>
+      </mj-section>
+
+
+      <!-- Main Section -->
+      <mj-section background-color="linear-gradient(135deg,  #ee9b35 0%,#e7045a 100%)">
+        <mj-column width="450">
+
+          <mj-text>
+            <p class="heading">Ciao Nome!
+              <p>
+          </mj-text>
+
+          <mj-text color="#fff">Congratulazioni! La tua registrazione a Swap è completa. Adesso puoi effettuare il login e presonalizzare ulteriormente il tuo profilo. <br><br>Ti ricordiamo inoltre che con le credenzialiche hai usato per registrarti avrai accesso a Swap tramite
+            webDAV.</mj-text>
+
+
+          <mj-text color="#fff">
+            Che aspetti? Inizia a condividere!</mj-text>
+
+          <mj-button padding="20" href="https://fortelli.it/login/?email" font-size="30" font-family="lovelo" background-color="#074d7b">Accedi a Swap</mj-button>
+
+          <mj-spacer height="40px" />
+
+          <mj-text color="#fff">Se il link qui sopra non funziona copia ed incolla il seguente URL nella barra deli indirizzi del browser per accedere a Swap</mj-text>
+          <mj-section background-color="#fff" border-radius="3" padding="10">
+            <mj-text align="center"><a href="https://forteli.it/swap/login/?email">https://forteli.it/swap/login/?email</a></mj-text>
+          </mj-section>
+
+        </mj-column>
+      </mj-section>
+
+
+
+      <!-- Footer -->
+      <mj-section background-color="#fff">
+        <mj-column>
+
+          <mj-text align="center" font-size="11">Il Team di Swap &copy; 2017</mj-text>
+
+
+
+        </mj-column>
+      </mj-section>
+
+
+
+
+
+    </mj-container>
+  </mj-body>
+</mjml>
