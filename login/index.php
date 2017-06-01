@@ -112,8 +112,31 @@
 								<label for="last-name">Cognome</label>
 								<input type="text" id="input--last-name" name="last_name" tabindex="6">
 							</div>
+							
+							<div id="mobile-form">
+								<label for="username">Username</label>
+								<input type="text" id="input--username" name="username" tabindex="1">
+								
+								<label for="email">E-mail</label>
+								<input type="text" id="input--email" name="email" tabindex="2">
+								
+								<label for="password">Password</label>
+								<input type="password" id="input--password" name="password" tabindex="3">
+								
+								<label for="password2">Ripeti password</label>
+								<input type="password" id="input--password-2" name="password2" tabindex="4">
+								
+								<label for="first-name">Nome</label>
+								<input type="text" id="input--first-name" name="first_name" tabindex="5">
+								
+								<label for="last-name">Cognome</label>
+								<input type="text" id="input--last-name" name="last_name" tabindex="6">
+								
+							</div>
 							<input type="submit" id="input--submit" name="register" value="Registrati">
 						</form>
+						
+						
 					</div>
 				</div>
 			</div>
