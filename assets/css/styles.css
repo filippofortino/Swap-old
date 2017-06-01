@@ -381,9 +381,9 @@ button {
 	height: 200px;
 }
 
-/*******************
-	REGISTRATION
-*******************/
+/*------------------
+	Registration
+-------------------*/
 div.authentication {
 	display: flex;
 	background-color: #fff;
@@ -477,6 +477,9 @@ div.authentication .form-container {
 	flex-direction: column;
 	align-items: center;
 }
+div.authentication #registration form #mobile-form {
+	display: none;
+}
 
 /** Error Box **/
 p.error-box {
@@ -496,15 +499,46 @@ p.success-box {
 
 
 
-
+@media all and (max-width: 1250px) {
+	div.authentication {
+		flex-direction: column;
+	}
+	
+	div.authentication #registration {
+		flex-grow: 3;
+		padding-left: 0px;
+		padding-top: 25px;
+		border-left: none;
+		border-top: 2px solid #ecf0f1;
+	}
+	div.authentication #login {
+		margin-bottom: 30px;
+	}
+}
 
 @media all and (max-width: 965px) {
 	.filemanager  #content {
 		margin: 30px auto 0;
-		padding: 1px;
+/* 		padding: 1px; */
 	}
 	
 	.filemanager header .search input[type="search"]:focus {
+		width: 300px;
+	}
+	
+	/** Registration **/
+	div.authentication #form--register {
+		flex-direction: column;
+	}
+	div.authentication #registration form #field-separator--left,
+	div.authentication #registration form #field-separator--right {
+		display: none;
+	}
+	div.authentication #registration form #mobile-form {
+		display: block;
+	}
+	div.authentication #registration form #input--submit {
+		margin-left: 0;
 		width: 300px;
 	}
 }
@@ -512,6 +546,17 @@ p.success-box {
 @media all and (max-width: 420px) {
 	.filemanager header .search input[type="search"]:focus {
 		width: 250px;
+	}
+	
+	/** Registration **/
+	div.authentication .form-container {
+		display: block;
+	}
+	div.authentication form input {
+		width: 100% !important;
+	}
+	div.authentication #login {
+		padding-right: 0;
 	}
 }
 
