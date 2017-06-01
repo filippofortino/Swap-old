@@ -111,18 +111,23 @@
 		 */
 		private function checkPasswordAndLogin() {
 			//$sql = "SELECT * FROM `swp_user` WHERE 1";
-			$stmt = $this->db->prepare("SELECT username, password, active FROM swp_user WHERE username = ? OR email = ?");
+			$stmt = $this->db->prepare("SELECT username, password, first_name, last_name, email, avatar, last_login, active FROM swp_user WHERE username = ? OR email = ?");
 			
 			$stmt->bind_param("ss", $_POST['username'], $_POST['username']);
 			$stmt->execute();
-			$stmt->bind_result($user, $pass, $active);
+			$stmt->bind_result($user, $pass, $first_name, $last_name, $email, $avatar, $last_login, $active);
 			
 			if($stmt->fetch() != NULL)
 				if(password_verify($_POST['password'], $pass)) {
 					if(boolval($active)) {
 						$_SESSION['username'] = $user;
+						$_SESSION['first_name'] = $first_name;
+						$_SESSION['last_name'] = $last_name;
+						$_SESSION['email'] = $email;
+						$_SESSION['avatar'] = $avatar;
+						$_SESSION['last_login'] = $last_login;
+						
 						$_SESSION['user_is_logged_in'] = true;
-						$_SESSION['last_activity'] = time();
 						$this->user_is_logged_in = true;
 						
 						$stmt->free_result();
