@@ -115,7 +115,7 @@
 				</div>
 				
 				<div class="user--login">
-					<a href="admin/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a>
+					<a href="login/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a>
 				</div>
 			</div>
 		</header>
