@@ -735,7 +735,7 @@ p.success-box {
 	z-index: 99;
 }
 .filemanager .data li .links {
-	z-index: 999;
+	z-index: 100;
 }
 .filemanager .data li .links a {
 	font-size: .8em;
