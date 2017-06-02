@@ -91,6 +91,7 @@
 	<!-- Styles -->
 	<link href="assets/css/styles.css" rel="stylesheet" />
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://unpkg.com/tippy.js/dist/tippy.css" rel="stylesheet">
 
 	<!--[if gte IE 9]>
 		<style type="text/css">
@@ -121,7 +122,7 @@
 								$letter = strtoupper(substr($_SESSION['first_name'], 0, 1));
 								if(!isset($_SESSION['user_color'])) $_SESSION['user_color'] = getRandomColor();
 								
-								echo "<a id='no-profile-link' href='profile/' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></a>";
+								echo "<span id='no-profile-trigger' class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
 							} else {
 								$avatar = $_SESSION['avatar'];
 								echo "<a href='profile/'><img src='profile/pictures/$avatar' alt='User Profile Image'></a>";
@@ -130,6 +131,19 @@
 							echo "<a id='login-link' href='login/'><i class='fa fa-sign-in' aria-hidden='true'></i><span>Login</span></a>";
 						}
 					?>
+						<div id="user-details-tooltip" style="display: none;">
+							<div>
+								<?php echo "<span class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>"; ?>
+							</div>
+							<div>
+								<?php
+									echo "<h1>" . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "</h1>";
+									echo "<h2>" . $_SESSION['email'] . "</h2>";
+								?>
+								
+								<a href="profile/">Profilo Personale</a>
+							</div>
+						</div>
 <!-- 					<a id="login-link" href="login/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a> -->
 <!-- 					<a href="profile/"><img src="profile/pictures/default-avatar.jpg" alt="User Profile Image"></a> -->
 <!-- 					<a id="no-profile-link" href="profile/" data-letter="F" style="background-color: red;"></a> -->
@@ -192,6 +206,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="assets/js/mousetrap.js"></script>
 	<script src="assets/js/jquery.stick-kit.min.js"></script>
+	<script src="https://unpkg.com/tippy.js/dist/tippy.min.js"></script>
 	<script src="assets/js/script.js"></script>
 </body>
 </html>
