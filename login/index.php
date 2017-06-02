@@ -10,6 +10,8 @@
 	if(isset($_GET['email'])) {
 		$get_email = $_GET['email'];
 	}
+	
+	if($auth->getLoginStatus())	header('Location: /swap/#Home');
 ?>
 <!DOCTYPE html>
 <html>
