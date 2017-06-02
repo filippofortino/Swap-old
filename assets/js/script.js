@@ -66,6 +66,18 @@ $(function(){
 		   // $("header p").css("visibility", "visible");
 	    });
     }
+    
+    // Add tooltip to user image profile
+    Tippy('#no-profile-trigger', {
+		html: '#user-details-tooltip', // or document.querySelector('#my-template-id')
+		theme: 'swap',
+		arrow: true,
+		position: 'bottom',
+		hideOnClick: false,
+		trigger: 'click',
+		offset: '50'
+	});
+	
 
 
 	$.get('scan.php', function(data) {
