@@ -18,7 +18,7 @@
 	$auth = new Authentication();
 	
 	// Session user messages
-	$_SESSION['feedback'] = "";
+	//$_SESSION['feedback'] = "";
 
 	// Disable browser cache
 	header("Cache-Control: no-cache, must-revalidate");
@@ -59,7 +59,7 @@
 			$feedback = "<p class='alert error'>Errore. Non disponi dei permessi necessari per eseguire questa operazione</p>";
 	}
 	
-	//print_r($_SESSION);
+// 	print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <html>
@@ -115,7 +115,24 @@
 				</div>
 				
 				<div class="user--login">
-					<a href="login/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a>
+					<?php
+						if($auth->getLoginStatus()) {
+							if(is_null($_SESSION['avatar'])) {
+								$letter = strtoupper(substr($_SESSION['first_name'], 0, 1));
+								if(!isset($_SESSION['user_color'])) $_SESSION['user_color'] = getRandomColor();
+								
+								echo "<a id='no-profile-link' href='profile/' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></a>";
+							} else {
+								$avatar = $_SESSION['avatar'];
+								echo "<a href='profile/'><img src='profile/pictures/$avatar' alt='User Profile Image'></a>";
+							}
+						} else {
+							echo "<a id='login-link' href='login/'><i class='fa fa-sign-in' aria-hidden='true'></i><span>Login</span></a>";
+						}
+					?>
+<!-- 					<a id="login-link" href="login/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a> -->
+<!-- 					<a href="profile/"><img src="profile/pictures/default-avatar.jpg" alt="User Profile Image"></a> -->
+<!-- 					<a id="no-profile-link" href="profile/" data-letter="F" style="background-color: red;"></a> -->
 				</div>
 			</div>
 		</header>
