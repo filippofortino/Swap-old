@@ -84,7 +84,7 @@ header {
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	z-index: 1000000;
+	z-index: 999;
 }
 header#paste {
 	-webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
@@ -170,7 +170,7 @@ header .user--login img {
 	border-radius: 50%;
 	border: 1px solid #d9dccd;
 }
-header .user--login a#no-profile-link {
+header .user--login span.no-profile-link {
 	position: relative;
 	display: block;
 	width: 50px;
@@ -180,8 +180,9 @@ header .user--login a#no-profile-link {
 	color: #fff;
 	font-size: 1.7em;
 	border-radius: 50%;
+	cursor: pointer;
 }
-header .user--login a#no-profile-link:after {
+header .user--login span.no-profile-link:after {
 	content: attr(data-letter);
 	position: absolute;
 	top: 0;
@@ -191,6 +192,87 @@ header .user--login a#no-profile-link:after {
 	text-align: center;
 	line-height: 53px;
 }
+
+/** Tooltips **/
+.tippy-tooltip.swap-theme {
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 10px;
+	color: #2c3e50;
+	-webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,0.3);
+	box-shadow: 0 0 8px 0 rgba(0,0,0,0.3);
+}
+.tippy-tooltip.swap-theme [x-arrow] {
+	border-bottom: 7px solid #fff;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+}
+.tippy-popper[x-placement=bottom] .tippy-tooltip.swap-theme [x-arrow] {
+    border-bottom: 7px solid #fff;
+}
+
+.tippy-popper {
+	outline: none;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content {
+	display: flex;
+	align-items: center;
+	padding: 15px 10px;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content div:last-child {
+	margin-left: 15px;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content h1 {
+	font-size: 1.6em;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content h2 {
+	font-size: .8em;
+	color: #95a5a6;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content a {
+	display: block;
+	font-size: .9em;
+	text-decoration: none;
+	padding: 8px;
+	margin-top: 15px;
+	color: #3498db;
+	border: 2px solid #3498db;
+	border-radius: 3px;
+	-webkit-transition: background-color .4s, color .4s;
+	transition: background-color .4s, color .4s;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content a:hover {
+	background-color: #3498db;
+	color: #fff;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] span.no-profile-link {
+	position: relative;
+	display: block;
+	width: 90px;
+	height: 90px;
+	line-height: 90px;
+	text-align: center;
+	color: #fff;
+	font-size: 2.3em;
+	border-radius: 50%;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] span.no-profile-link:after {
+	content: attr(data-letter);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 93px;
+}
+/*
+.tippy-tooltip[data-template-id="#user-details-tooltip"] {
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 10px;
+}
+*/
 
 /*-------------------------
 	Breadcrumbs
@@ -650,13 +732,16 @@ p.success-box {
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: 99;
+}
+.filemanager .data li .links {
+	z-index: 999;
 }
 .filemanager .data li .links a {
 	font-size: .8em;
 	text-decoration: none;
 	-webkit-transition: color .4s ease;
 	transition: color .4s ease;
-	z-index: 100;
 }
 
 .filemanager .data li .links a.viewfile {
