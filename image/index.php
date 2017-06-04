@@ -9,18 +9,21 @@
 	if(isset($_GET['image'])) {
 		$name = $_GET['image'];
 		
-		if(isset($_GET['type']) && $_GET['type'] == "H") { // Filemanager picture handler
+		if(isset($_GET['type']) && $_GET['type'] == "thumbnail") { // Filemanager picture handler
 			$name = urldecode($name);
 			
-			$cache_image = "../images/compressed/" . substr($name, 5);
-			if(file_exists($cache_image)) {
-				$img = new \claviska\SimpleImage();
-				$img->fromFile($cache_image)->toScreen();
+			if($_GET['cache'] == "cache") {
+				$cache_image = "../images/compressed/" . substr($name, 5);
+				if(file_exists($cache_image)) {
+					$img = new \claviska\SimpleImage();
+					$img->fromFile($cache_image)->toScreen();
+					exit();
+				}
 			}
 			
 			$image = "../$name";
 		} else { // Profile picture handler
-			$image =  "../profile/pictures/test.jpg";
+			$image =  "../profile/pictures/default-avatar.jpg";
 		}
 		
 		try {
