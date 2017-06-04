@@ -422,9 +422,10 @@ $(function(){
 					****************************/
 					/** href="'+f.path+'" title="'+ f.path +'" **/
 					var compressed_path = f.path.substr(5);
+					var on_the_fly = 'https://fortelli.it/swap/image?type=H&size=100&image='+encodeURIComponent(f.path);
 					
 					if(fileType == "jpg" || fileType == "png" || fileType == "jpeg" || fileType == "gif")
-						icon = '<img class="icon img-preview" src="https://fortelli.it/swap/images/compressed/'+compressed_path+'" alt='+name+'>';
+						icon = '<img class="icon img-preview" src="'+on_the_fly+'" alt='+name+'>';
 					else
 						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
 					var file = $('<li class="files"><div class="files"><span class="delete"><a href=?delete='+encodeURIComponent(f.path)+'&prev='+window.location.hash.slice(1)+'><i class="fa fa-trash-o"></i></a></span>'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span><span class="links"><a href="'+f.path+'" title="'+ f.path +'" target="_blank" class="viewfile">Visualizza</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></div></li>');
