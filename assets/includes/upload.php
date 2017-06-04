@@ -69,8 +69,8 @@
 					}
 					
 					try {
-						$img = new abeautifulsite\SimpleImage($new_file_path);
-						$img->thumbnail(100,100)->auto_orient()->save($dirpath . "/" . $_FILES['upl']['name'][$i]);
+						$img = new \claviska\SimpleImage();
+						$img->fromFile($new_file_path)->thumbnail(100,100)->autoOrient()->toFile($dirpath . "/" . $_FILES['upl']['name'][$i]);
 
 					} catch(Exception $e) {
 						$feedback = "<p class='alert error'>" . $e->getMessage() . "</p>";
