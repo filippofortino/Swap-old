@@ -421,7 +421,7 @@ $(function(){
 						Image Preview (BETA)
 					****************************/
 					/** href="'+f.path+'" title="'+ f.path +'" **/
-					var on_the_fly = 'https://fortelli.it/swap/image?type=H&size=100&image='+encodeURIComponent(f.path);
+					var on_the_fly = encodeURI('https://fortelli.it/swap/image/thumbnail/100/'+encodeURIComponent(f.path))+'/cache';
 					
 					if(fileType == "jpg" || fileType == "png" || fileType == "jpeg" || fileType == "gif")
 						icon = '<img class="icon img-preview" src="'+on_the_fly+'" alt='+name+'>';
