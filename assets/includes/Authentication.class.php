@@ -281,7 +281,7 @@
 			
 			if($stmt->fetch() != NULL) {
 				if(!boolval($active)) {
-					$differnce = strtotime($creation_date) - time();
+					$differnce = time() - strtotime($creation_date);
 					if($differnce < 86400) {
 						$stmt->free_result();
 						
