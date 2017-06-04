@@ -421,7 +421,6 @@ $(function(){
 						Image Preview (BETA)
 					****************************/
 					/** href="'+f.path+'" title="'+ f.path +'" **/
-					var compressed_path = f.path.substr(5);
 					var on_the_fly = 'https://fortelli.it/swap/image?type=H&size=100&image='+encodeURIComponent(f.path);
 					
 					if(fileType == "jpg" || fileType == "png" || fileType == "jpeg" || fileType == "gif")
