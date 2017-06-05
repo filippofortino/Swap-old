@@ -508,7 +508,8 @@ button {
 /*------------------
 	Registration
 -------------------*/
-div.authentication {
+div.authentication,
+div.profile {
 	display: flex;
 	background-color: #fff;
 /* 	min-height: 70vh; */
@@ -620,6 +621,37 @@ p.success-box {
 }
 
 
+/** Profile Page **/
+#profile--image {
+	padding-right: 25px;
+}
+#profile--image span.no-profile-link {
+	position: relative;
+	display: block;
+	width: 150px;
+	height: 150px;
+	line-height: 150px;
+	text-align: center;
+	color: #fff;
+	font-size: 3.2em;
+	border-radius: 50%;
+	cursor: pointer;
+}
+#profile--image span.no-profile-link:after {
+	content: attr(data-letter);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 153px;
+}
+
+#profile--details {
+	padding-left: 25px;
+	border-left: 2px solid #ecf0f1;
+}
 
 
 
