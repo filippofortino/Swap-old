@@ -198,7 +198,6 @@
 	<footer>
         <p>
 	        Swap. Made with <i class="fa fa-heart"></i> by <a href="mailto:filippofortino@gmail.com">Filippo Fortino</a>
-			<?php echo ($auth->getLoginStatus()) ? "<span>" . $_SESSION['username'] . " | <a href='?action=logout'>Logout</a></span>" : "<span><a href='admin/'>Admin</a></span>"; ?>	
 	    </p>
     </footer>
 
