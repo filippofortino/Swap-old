@@ -140,8 +140,10 @@
 									echo "<h1>" . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . "</h1>";
 									echo "<h2>" . $_SESSION['email'] . "</h2>";
 								?>
-								
-								<a href="profile/">Profilo Personale</a>
+								<div id="profile-button--wrapper">
+									<a id="profile-link" href="profile/">Profilo</a>
+									<a id="logout-link" href="?action=logout">Esci</a>
+								</div>
 							</div>
 						</div>
 <!-- 					<a id="login-link" href="login/"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Login</span></a> -->

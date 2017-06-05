@@ -229,20 +229,36 @@ header .user--login span.no-profile-link:after {
 	font-size: .8em;
 	color: #95a5a6;
 }
-.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content a {
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper a {
+	flex-grow: 1;
+	margin-right: 10px;
 	display: block;
 	font-size: .9em;
 	text-decoration: none;
 	padding: 8px;
 	margin-top: 15px;
-	color: #3498db;
-	border: 2px solid #3498db;
 	border-radius: 3px;
 	-webkit-transition: background-color .4s, color .4s;
 	transition: background-color .4s, color .4s;
 }
-.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content a:hover {
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper a#profile-link {
+	color: #3498db;
+	border: 2px solid #3498db;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper a#logout-link {
+	color: #e74c3c;
+	border: 2px solid #e74c3c;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper a#profile-link:hover {
 	background-color: #3498db;
+	color: #fff;
+}
+.tippy-tooltip[data-template-id="#user-details-tooltip"] .tippy-tooltip-content #profile-button--wrapper a#logout-link:hover {
+	background-color: #e74c3c;
 	color: #fff;
 }
 .tippy-tooltip[data-template-id="#user-details-tooltip"] span.no-profile-link {
