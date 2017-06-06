@@ -318,32 +318,82 @@
 				return true;
 			else 
 				return false;		
-	}
+		}
 	
-	private function sendSuccessEmail($email) {
-		// Get the user first name
-		$stmt = $this->db->prepare("SELECT first_name FROM swp_user_2 WHERE email = ?");
-		$stmt->bind_param("s", $email);
-		$stmt->execute();
-		$stmt->bind_result($first_name);
-		$stmt->fetch();
-		
-		$stmt->free_result();
-		
-		$subject = "Swap - Conferma Registrazione";
+		private function sendSuccessEmail($email) {
+			// Get the user first name
+			$stmt = $this->db->prepare("SELECT first_name FROM swp_user_2 WHERE email = ?");
+			$stmt->bind_param("s", $email);
+			$stmt->execute();
+			$stmt->bind_result($first_name);
+			$stmt->fetch();
 			
-		$headers = "From: admin@fortelli.it Swap\r\n";
-		$headers .= "Reply-To: admin@fortelli.it\r\n";
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			$stmt->free_result();
 			
-		$login_url = "https://fortelli.it/swap/login/?email=$email";
-		
-		$content = '<!doctype html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head> <title></title> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <style type="text/css"> #outlook a{padding: 0;}.ReadMsgBody{width: 100%;}.ExternalClass{width: 100%;}.ExternalClass *{line-height: 100%;}body{margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table, td{border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;}img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}p{display: block; margin: 13px 0;}</style> <style type="text/css"> @media only screen and (max-width:480px){@-ms-viewport{width: 320px;}@viewport{width: 320px;}}</style><!--[if mso]><xml> <o:OfficeDocumentSettings> <o:AllowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings></xml><![endif]--><!--[if lte mso 11]><style type="text/css"> .outlook-group-fix{width:100% !important;}</style><![endif]--> <style type="text/css"> .heading{padding-top: 0px; text-align: center; font-size: 45px; font-family: "lovelo"; color: #fff; line-height: 45px}.background{background-color: red;}</style> <style type="text/css"> @media only screen and (min-width:480px){.mj-column-per-100{width: 100%!important;}.mj-column-px-450{width: 450px!important;}}</style></head><body style="background: #ecf0f1;"> <div style="background-color:#ecf0f1;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="left" border="0"> <tbody> <tr> <td style="width:220px;"> <a href="#" target="_blank"><img alt="" title="" height="auto" src="https://fortelli.it/swap/assets/img/swap_logo_web_complete.png" style="border:none;border-radius:0px;display:block;outline:none;text-decoration:none;width:100%;height:auto;" width="220"></a> </td></tr></tbody> </table> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:450px;"><![endif]--> <div class="mj-column-px-450 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;"> <p class="heading">Ciao ' . $first_name . '! </p><p></p></div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Congratulazioni! La tua registrazione a Swap è completa. Adesso puoi effettuare il login e presonalizzare ulteriormente il tuo profilo. <br><br>Ti ricordiamo inoltre che con le credenzialiche hai usato per registrarti avrai accesso a Swap tramite webDAV. </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Che aspetti? Inizia a condividere!</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:20px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"> <tbody> <tr> <td style="border:none;border-radius:3px;color:#fff;cursor:auto;padding:10px 25px;" align="center" valign="middle" bgcolor="#074d7b"><a href="' . $login_url . '" style="text-decoration:none;line-height:100%;background:#074d7b;color:#fff;font-family:lovelo;font-size:30px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">Accedi a Swap</a></td></tr></tbody> </table> </td></tr><tr> <td style="word-wrap:break-word;font-size:0px;"> <div style="font-size:1px;line-height:40px;white-space:nowrap;"> </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Se il link qui sopra non funziona copia ed incolla il seguente URL nella barra deli indirizzi del browser per accedere a Swap</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px;"> <div style="margin:0px auto;border-radius:3px;max-width:450px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;border-radius:3px;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:10px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:NaNpx;"><![endif]--> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:16px;line-height:22px;text-align:center;"><a href="' . $login_url . '">' . $login_url . '</a></div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center"> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:11px;line-height:22px;text-align:center;">Il Team di Swap © 2017</div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </div></body></html>';
-		
-		if(mail($email, $subject, $content, $headers)) 
-			return true;
-		else 
-			return false;
+			$subject = "Swap - Conferma Registrazione";
+				
+			$headers = "From: admin@fortelli.it Swap\r\n";
+			$headers .= "Reply-To: admin@fortelli.it\r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+				
+			$login_url = "https://fortelli.it/swap/login/?email=$email";
+			
+			$content = '<!doctype html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head> <title></title> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <style type="text/css"> #outlook a{padding: 0;}.ReadMsgBody{width: 100%;}.ExternalClass{width: 100%;}.ExternalClass *{line-height: 100%;}body{margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table, td{border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;}img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}p{display: block; margin: 13px 0;}</style> <style type="text/css"> @media only screen and (max-width:480px){@-ms-viewport{width: 320px;}@viewport{width: 320px;}}</style><!--[if mso]><xml> <o:OfficeDocumentSettings> <o:AllowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings></xml><![endif]--><!--[if lte mso 11]><style type="text/css"> .outlook-group-fix{width:100% !important;}</style><![endif]--> <style type="text/css"> .heading{padding-top: 0px; text-align: center; font-size: 45px; font-family: "lovelo"; color: #fff; line-height: 45px}.background{background-color: red;}</style> <style type="text/css"> @media only screen and (min-width:480px){.mj-column-per-100{width: 100%!important;}.mj-column-px-450{width: 450px!important;}}</style></head><body style="background: #ecf0f1;"> <div style="background-color:#ecf0f1;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="left" border="0"> <tbody> <tr> <td style="width:220px;"> <a href="#" target="_blank"><img alt="" title="" height="auto" src="https://fortelli.it/swap/assets/img/swap_logo_web_complete.png" style="border:none;border-radius:0px;display:block;outline:none;text-decoration:none;width:100%;height:auto;" width="220"></a> </td></tr></tbody> </table> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:450px;"><![endif]--> <div class="mj-column-px-450 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;"> <p class="heading">Ciao ' . $first_name . '! </p><p></p></div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Congratulazioni! La tua registrazione a Swap è completa. Adesso puoi effettuare il login e presonalizzare ulteriormente il tuo profilo. <br><br>Ti ricordiamo inoltre che con le credenzialiche hai usato per registrarti avrai accesso a Swap tramite webDAV. </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Che aspetti? Inizia a condividere!</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:20px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"> <tbody> <tr> <td style="border:none;border-radius:3px;color:#fff;cursor:auto;padding:10px 25px;" align="center" valign="middle" bgcolor="#074d7b"><a href="' . $login_url . '" style="text-decoration:none;line-height:100%;background:#074d7b;color:#fff;font-family:lovelo;font-size:30px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">Accedi a Swap</a></td></tr></tbody> </table> </td></tr><tr> <td style="word-wrap:break-word;font-size:0px;"> <div style="font-size:1px;line-height:40px;white-space:nowrap;"> </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div class="" style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Se il link qui sopra non funziona copia ed incolla il seguente URL nella barra deli indirizzi del browser per accedere a Swap</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px;"> <div style="margin:0px auto;border-radius:3px;max-width:450px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;border-radius:3px;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:10px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:NaNpx;"><![endif]--> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:16px;line-height:22px;text-align:center;"><a href="' . $login_url . '">' . $login_url . '</a></div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center"> <div class="" style="cursor:auto;color:#626262;font-family:sans-serif;font-size:11px;line-height:22px;text-align:center;">Il Team di Swap © 2017</div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </div></body></html>';
+			
+			if(mail($email, $subject, $content, $headers)) 
+				return true;
+			else 
+				return false;
+		}
 	}
-}
+
+	class UserProfileHandler extends Authentication {
+		
+		public function __construct() {
+			$this->databaseConnect();
+			
+			if(isset($_POST['password-update'])) {
+				$username = $_POST['username'];
+				$old_password = $_POST['old-password'];
+				$new_password = $_POST['new-password'];
+				$new_password_2 = $_POST['new-password-2'];;
+				$this->changePassword($username, $old_password, $new_password, $new_password_2);
+			}
+			
+		}
+		
+		private function changePassword($username, $old_password, $new_password, $new_password_2) {
+			$new_password = filter_var($new_password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$new_password_2 = filter_var($new_password_2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			
+			$stmt = $this->db->prepare("SELECT password FROM swp_user_2 WHERE username = ?");
+			$stmt->bind_param("s", $username);
+			$stmt->execute();
+			$stmt->bind_result($db_password);
+			$stmt->fetch();
+			
+			$stmt->free_result();
+			
+			if(password_verify($old_password, $db_password)) {
+				if($new_password == $new_password_2) {
+					$digesta1 = md5("$username:$realm:$new_password");
+					$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+					
+					$stmt = $this->db->prepare("UPDATE swp_user_2 SET password = ? , digesta1 = ? WHERE username = ?");
+					$stmt->bind_param("sss", $new_password, $digesta1, $username);
+					
+					if($stmt->execute())
+						$this->success = "La tua password è stata correttamente modificata";
+					else
+						$this->error = "Impossibile modificare la password";
+				} else {
+					$this->error = "Le due password non corrispondono";
+				}
+			} else {
+				$this->error = "La vecchia password inserita non è corretta";
+			}
+		}
+		
+	}
+
