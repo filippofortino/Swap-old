@@ -76,7 +76,7 @@
 							echo "<span id='no-profile-trigger' class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
 						} else {
 							$avatar = $_SESSION['avatar'];
-							echo "<a href='profile/'><img src='profile/pictures/$avatar' alt='User Profile Image'></a>";
+							echo "<img src='../profile/pictures/$avatar' alt='User Profile Image'>";
 						}
 					?>
 				</div>
