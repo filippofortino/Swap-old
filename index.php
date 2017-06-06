@@ -133,7 +133,14 @@
 					?>
 						<div id="user-details-tooltip" style="display: none;">
 							<div>
-								<?php echo "<span class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>"; ?>
+								<?php
+									if(is_null($_SESSION['avatar'])) {
+										echo "<span class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
+									} else {
+										echo "<img src='profile/pictures/$avatar' alt='User Profile Image'>";
+									}
+								
+								?>
 							</div>
 							<div>
 								<?php
