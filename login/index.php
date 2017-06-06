@@ -69,8 +69,8 @@
 					
 					<div class="form-container">
 						<?php 
-							if(isset($auth->error)) echo "<p class='error-box'>" . $auth->error ."</p>"; 
-							if(isset($auth->success)) echo "<p class='success-box'>" . $auth->success ."</p>";
+							if(isset($auth->error)) echo "<p class='box--alert box--error'>" . $auth->error ."</p>"; 
+							if(isset($auth->success)) echo "<p class='box--alert box--success'>" . $auth->success ."</p>";
 						?>
 						
 						<form id="form--login" name="login-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -89,8 +89,8 @@
 					<h1>Registrati</h1>
 					<div class="form-container">
 						<?php 
-							if(isset($register->error)) echo "<p class='error-box'>" . $register->error ."</p>";
-							if(isset($register->success)) echo "<p class='success-box'>" . $register->success ."</p>";
+							if(isset($register->error)) echo "<p class='box--alert box--error'>" . $register->error ."</p>";
+							if(isset($register->success)) echo "<p class='box--alert box--success'>" . $register->success ."</p>";
 							?>
 						<form id="form--register" name="register-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 							<div id="field-separator--left">
