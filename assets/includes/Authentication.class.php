@@ -367,7 +367,7 @@
 			$new_password = filter_var($new_password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$new_password_2 = filter_var($new_password_2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			
-			$stmt = $this->db->prepare("SELECT password FROM swp_user_2 WHERE username = ?");
+			$stmt = $this->db->prepare("SELECT password FROM swp_user WHERE username = ?");
 			$stmt->bind_param("s", $username);
 			$stmt->execute();
 			$stmt->bind_result($db_password);
@@ -381,7 +381,7 @@
 						$digesta1 = md5("$username:$realm:$new_password");
 						$new_password = password_hash($new_password, PASSWORD_DEFAULT);
 						
-						$stmt = $this->db->prepare("UPDATE swp_user_2 SET password = ? , digesta1 = ? WHERE username = ?");
+						$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE username = ?");
 						$stmt->bind_param("sss", $new_password, $digesta1, $username);
 						
 						if($stmt->execute())
