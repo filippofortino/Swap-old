@@ -608,16 +608,16 @@ div.authentication #registration form #mobile-form {
 
 /** Error Box **/
 p.error-box {
-	padding: 10px 5px;
-	border: 2px solid #c0392b;
-	color: #c0392b;
-	margin-bottom: 20px;
+	padding: 10px 5px !important;
+	border: 2px solid #c0392b !important;
+	color: #c0392b !important;
+	margin-bottom: 20px !important;
 }
 p.success-box {
-	padding: 10px 5px;
-	border: 2px solid #2ecc71;
-	color: #2ecc71;
-	margin-bottom: 20px;
+	padding: 10px 5px !important;
+	border: 2px solid #2ecc71 !important;
+	color: #2ecc71 !important;
+	margin-bottom: 20px !important;
 }
 
 
