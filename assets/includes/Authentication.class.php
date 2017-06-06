@@ -375,23 +375,27 @@
 			
 			$stmt->free_result();
 			
-			if(password_verify($old_password, $db_password)) {
-				if($new_password == $new_password_2) {
-					$digesta1 = md5("$username:$realm:$new_password");
-					$new_password = password_hash($new_password, PASSWORD_DEFAULT);
-					
-					$stmt = $this->db->prepare("UPDATE swp_user_2 SET password = ? , digesta1 = ? WHERE username = ?");
-					$stmt->bind_param("sss", $new_password, $digesta1, $username);
-					
-					if($stmt->execute())
-						$this->success = "La tua password è stata correttamente modificata";
-					else
-						$this->error = "Impossibile modificare la password";
+			if(!empty($username) && !empty($old_password) && !empty($new_password) && !empty($new_password_2)) {
+				if(password_verify($old_password, $db_password)) {
+					if($new_password == $new_password_2) {
+						$digesta1 = md5("$username:$realm:$new_password");
+						$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+						
+						$stmt = $this->db->prepare("UPDATE swp_user_2 SET password = ? , digesta1 = ? WHERE username = ?");
+						$stmt->bind_param("sss", $new_password, $digesta1, $username);
+						
+						if($stmt->execute())
+							$this->success = "La tua password è stata correttamente modificata";
+						else
+							$this->error = "Impossibile modificare la password";
+					} else {
+						$this->error = "Le due password non corrispondono";
+					}
 				} else {
-					$this->error = "Le due password non corrispondono";
+					$this->error = "La password inserita non è corretta";
 				}
 			} else {
-				$this->error = "La vecchia password inserita non è corretta";
+				$this->error = "Compila tutti i campi";
 			}
 		}
 		
