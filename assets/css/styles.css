@@ -627,6 +627,9 @@ p.box--success {
 
 
 /** Profile Page **/
+.profile p.box--alert {
+	display: inline-block;
+}
 #profile--image {
 	padding-right: 25px;
 }
@@ -657,7 +660,6 @@ p.box--success {
 	padding-left: 25px;
 	border-left: 2px solid #ecf0f1;
 }
-
 #profile--details h1 {
 	font-size: 3em;
 	color: #e7045a;
@@ -678,6 +680,58 @@ p.box--success {
 }
 #profile--details p span {
 	color: #7f8c8d;
+}
+#profile--details #login form input, 
+#profile--details form label {
+		display: block;
+}
+#profile--details form input {
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	outline: none;
+	margin-bottom: 20px;
+	-webkit-appearance: none;
+	-webkit-transition: color .6s, background-color .6s, border .6s;
+	transition: color .6s, background-color .6s, border .6s;
+}
+#profile--details form input[type=text],
+#profile--details form input[type=password] {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: .9em;
+	border: 2px solid #ee9b35;
+	padding: 0 5px;
+	
+}
+#profile--details form input[type=text]:focus,
+#profile--details form input[type=password]:focus {
+	border: 2px solid #e7045a;
+}
+#profile--details form #input--submit {
+	font-family: 'lovelo', sans-serif;
+	font-size: .9em;
+	display: block;
+	line-height: 25px;
+	border: 2px solid #e7045a;
+	background-color: transparent;
+	color: #e7045a;
+}
+#profile--details form #input--submit:hover {
+	border-color: #ee9b35;
+	color: #ee9b35;
+	background-color: rgba(238, 155, 53, 0.1);
+	cursor: pointer;
+}
+#profile--details form label {
+	font-size: .8em;
+	color: #b6c1c9;
+	margin-bottom: 5px;
+}
+#profile--details form input[type=text]:focus,
+#profile--details form input[type=password]:focus {
+	border: 2px solid #e7045a;
 }
 #profile--details #profile--webdav p.webdav--description {
 	font-size: 1.1em;
