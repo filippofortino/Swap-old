@@ -282,6 +282,12 @@ header .user--login span.no-profile-link:after {
 	text-align: center;
 	line-height: 93px;
 }
+.tippy-tooltip[data-template-id="#user-details-tooltip"] img {
+	max-width: 90px;
+	max-height: 90px;
+	border-radius: 50%;
+	border: 1px solid #d9dccd;
+}
 /*
 .tippy-tooltip[data-template-id="#user-details-tooltip"] {
 	background-color: #fff;
@@ -657,6 +663,12 @@ p.box--success {
 	height: 100%;
 	text-align: center;
 	line-height: 153px;
+}
+#profile--image img {
+	max-width: 150px;
+	max-height: 150px;
+	border-radius: 50%;
+	border: 1px solid #d9dccd;
 }
 
 #profile--details {
