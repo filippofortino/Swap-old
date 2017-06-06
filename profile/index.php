@@ -28,7 +28,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		
-		<meta property="og:title" content="Swap | User Profile" />
+		<meta property="og:title" content="<?php echo "$username@Swap | Profilo Utente"; ?>" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://fortelli.it/swap/" />
 		<meta property="og:description" content="Swap - Share your files, in a snap!" />
@@ -39,7 +39,7 @@
 		<meta property="og:image:height" content="325" />
 		<meta property="og:locale" content="it_IT" />
 	
-		<title>Swap | User Profile</title>
+		<title><?php echo "$username@Swap | Profilo Utente"; ?></title>
 	
 		<!-- Styles -->
 		<link href="../assets/css/styles.css" rel="stylesheet" />
@@ -80,11 +80,39 @@
 				</div>
 				
 				<div id="profile--details">
-					<?php
-						echo "<h1>$first_name $last_name</h1>";
-						echo "<p>Username: $username</p>";
-						echo "<p>Email: $email</p>";
-					?>
+					<h1>Filippo Fortino</h1>
+					
+					<div id="profile--details-wrapper">
+						<h2>Dati Utente</h2>
+						<p>Username: <span>filippo</span></p>
+						<p>Email: <span>filippofortino@gmail.com</span></p>
+						
+						<div id="profile--password-update">
+							<h2>Cambia Password</h2>
+							<form id="form--password-update" name="password-update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+								<label for="old-password">Vecchia Password</label>
+								<input type="password" id="input--old-password" name="old-password">
+								
+								<label for="new-password">Nuova Password</label>
+								<input type="password" id="input--new-password" name="new-password">
+								
+								<label for="new-password-2">Ripeti Password</label>
+								<input type="password" id="input--new-password-2" name="new-password-2">
+								
+								<input type="submit" id="input--submit" name="password-update" value="Modifica">
+							</form>
+						</div>
+						
+						<div id="profile--webdav">
+							<h2>WebDAV</h2>
+							<p class="webdav--description">Puoi accedere a swap tramite WebDAV usando il seguente indirizzo:</p>
+							<p class="webdav--box">https://fortelli.it/swap/webdav/</p>
+							
+							<p class="webdav--description">Le credenziali di accesso a WebDAV sono:</p>
+							<p>Username: <span>filippo</p>
+							<p>Password: <span>La tua password</span></p>
+						</div>
+					</div>
 				</div>
 			</div>
 			
