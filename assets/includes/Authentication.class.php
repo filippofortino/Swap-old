@@ -1,5 +1,4 @@
 <?php
-
 	/**
 	 * Swap
 	 *
@@ -223,6 +222,7 @@
 			$last_name = filter_var($last_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			
+			// Accessing global $realm value instead of local one
 			global $realm;
 			
 			$stmt = $this->db->prepare("SELECT username, email FROM swp_user_2 WHERE username = ? OR email = ?");
@@ -376,6 +376,9 @@
 			$stmt->free_result();
 			
 			if(!empty($old_password) && !empty($new_password) && !empty($new_password_2)) {
+				// Accessing global $realm value instead of local one
+				global $realm;
+				
 				if(password_verify($old_password, $db_password)) {
 					if($new_password == $new_password_2) {
 						$digesta1 = md5("$username:$realm:$new_password");
