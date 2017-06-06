@@ -86,6 +86,8 @@
 					
 					<div id="profile--details-wrapper">
 						<h2>Dati Utente</h2>
+						<p>Nome: <span><?php echo $first_name; ?></span></p>
+						<p>Cognome: <span><?php echo $last_name; ?></span></p>
 						<p>Username: <span><?php echo $username; ?></span></p>
 						<p>Email: <span><?php echo $email; ?></span></p>
 						
@@ -95,7 +97,6 @@
 								if(isset($profile->error)) echo "<p class='box--alert box--error'>" . $profile->error ."</p>"; 
 								if(isset($profile->success)) echo "<p class='box--alert box--success'>" . $profile->success ."</p>";
 							?>
-							
 							<form id="form--password-update" name="password-update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 								<label for="old-password">Password Attuale</label>
 								<input type="password" id="input--old-password" name="old-password">
