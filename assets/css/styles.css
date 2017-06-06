@@ -421,6 +421,9 @@ header .user--login span.no-profile-link:after {
 	position: relative;
 	margin: 100px auto 50px;
 }
+.filemanager #content.profile {
+	margin: 40px auto 50px;
+}
 .filemanager #content.paste {
 	padding: 20px;
 	background-color: #fff;
@@ -681,7 +684,6 @@ p.box--success {
 #profile--details p span {
 	color: #7f8c8d;
 }
-#profile--details #login form input, 
 #profile--details form label {
 		display: block;
 }
@@ -787,7 +789,7 @@ p.box--success {
 
 @media all and (max-width: 965px) {
 	.filemanager  #content {
-		margin: 30px auto 0;
+		margin: 30px auto 50px;
 /* 		padding: 1px; */
 	}
 	
