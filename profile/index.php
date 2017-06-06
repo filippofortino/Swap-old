@@ -121,6 +121,9 @@
 							<p>Username: <span>filippo</p>
 							<p>Password: <span>La tua password</span></p>
 						</div>
+						
+						<h2>Disconnetiti</h2>
+						<a href="?action=logout">Esci dal tuo account</a>
 					</div>
 				</div>
 			</div>
