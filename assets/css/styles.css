@@ -669,6 +669,9 @@ p.box--success {
 	padding-top: 10px;
 	border-top: 2px solid #ecf0f1;
 }
+#profile--details h2:last-of-type {
+	margin-top: 55px;
+}
 #profile--details p {
 	color: #b6c1c9;
 	margin: 2px 0;
@@ -691,6 +694,22 @@ p.box--success {
 	margin: 10px 0;
 	background-color: #34495e;
 	color: #ecf0f1;
+	cursor: pointer;
+}
+#profile--details .logout-button {
+	display: inline-block;
+	font-size: .9em;
+	text-decoration: none;
+	color: #e74c3c;
+	border: 2px solid #e74c3c;
+	padding: 8px;
+	border-radius: 3px;
+	-webkit-transition: background-color .4s, color .4s;
+	transition: background-color .4s, color .4s;
+}
+#profile--details .logout-button:hover {
+	background-color: #e74c3c;
+	color: #fff;
 }
 
 
