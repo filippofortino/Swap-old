@@ -3,6 +3,7 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/Authentication.class.php';
 	
 	$auth = new Authentication();
+	$profile = new UserProfileHandler();
 	
 	// Insert session data into variables for
 	// easy access
@@ -90,6 +91,11 @@
 						
 						<div id="profile--password-update">
 							<h2>Cambia Password</h2>
+							<?php 
+								if(isset($profile->error)) echo "<p class='box--alert box--error'>" . $profile->error ."</p>"; 
+								if(isset($profile->success)) echo "<p class='box--alert box--success'>" . $profile->success ."</p>";
+							?>
+							
 							<form id="form--password-update" name="password-update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 								<label for="old-password">Vecchia Password</label>
 								<input type="password" id="input--old-password" name="old-password">
@@ -108,7 +114,7 @@
 						
 						<div id="profile--webdav">
 							<h2>WebDAV</h2>
-							<p class="webdav--description">Puoi accedere a swap tramite WebDAV usando il seguente indirizzo:</p>
+							<p class="webdav--description">Puoi accedere a swap tramite WebDAV utilizzando il seguente indirizzo:</p>
 							<p class="webdav--box" data-clipboard-text="https://fortelli.it/swap/webdav" title="Clicca per copiare negli appunti">https://fortelli.it/swap/webdav</p>
 							
 							<p class="webdav--description">Le credenziali di accesso a WebDAV sono:</p>
