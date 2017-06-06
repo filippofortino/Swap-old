@@ -653,6 +653,41 @@ p.success-box {
 	border-left: 2px solid #ecf0f1;
 }
 
+#profile--details h1 {
+	font-size: 3em;
+	color: #e7045a;
+}
+#profile--details h2 {
+	font-size: 1.5em;
+	color: #ee9b35;
+	margin: 35px 0 15px 0;
+	padding-top: 10px;
+	border-top: 2px solid #ecf0f1;
+}
+#profile--details p {
+	color: #b6c1c9;
+	margin: 2px 0;
+}
+#profile--details p span {
+	color: #7f8c8d;
+}
+#profile--details #profile--webdav p.webdav--description {
+	font-size: 1.1em;
+	color: #2c3e50;
+}
+#profile--details #profile--webdav p:nth-of-type(3) {
+	margin-top: 15px;
+}
+#profile--details #profile--webdav p.webdav--box {
+	display: inline-block;
+	font-size: .9em;
+	padding: 10px 20px;
+	border-radius: 3px;
+	margin: 10px 0;
+	background-color: #34495e;
+	color: #ecf0f1;
+}
+
 
 
 @media all and (max-width: 1250px) {
