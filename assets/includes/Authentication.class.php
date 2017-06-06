@@ -375,7 +375,7 @@
 			
 			$stmt->free_result();
 			
-			if(!empty($username) && !empty($old_password) && !empty($new_password) && !empty($new_password_2)) {
+			if(!empty($old_password) && !empty($new_password) && !empty($new_password_2)) {
 				if(password_verify($old_password, $db_password)) {
 					if($new_password == $new_password_2) {
 						$digesta1 = md5("$username:$realm:$new_password");
