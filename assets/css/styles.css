@@ -607,13 +607,18 @@ div.authentication #registration form #mobile-form {
 }
 
 /** Error Box **/
-p.error-box {
+p.box--alert {
+	padding: 10px 5px !important;
+	border: 2px solid #c0392b !important;
+	margin-bottom: 20px !important;
+}
+p.box--error {
 	padding: 10px 5px !important;
 	border: 2px solid #c0392b !important;
 	color: #c0392b !important;
 	margin-bottom: 20px !important;
 }
-p.success-box {
+p.box--success {
 	padding: 10px 5px !important;
 	border: 2px solid #2ecc71 !important;
 	color: #2ecc71 !important;
