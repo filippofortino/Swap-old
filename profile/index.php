@@ -82,12 +82,12 @@
 				</div>
 				
 				<div id="profile--details">
-					<h1>Filippo Fortino</h1>
+					<?php echo "<h1>$first_name $last_name</h1>"; ?>
 					
 					<div id="profile--details-wrapper">
 						<h2>Dati Utente</h2>
-						<p>Username: <span>filippo</span></p>
-						<p>Email: <span>filippofortino@gmail.com</span></p>
+						<p>Username: <span><?php echo $username; ?></span></p>
+						<p>Email: <span><?php echo $email; ?></span></p>
 						
 						<div id="profile--password-update">
 							<h2>Cambia Password</h2>
@@ -97,7 +97,7 @@
 							?>
 							
 							<form id="form--password-update" name="password-update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-								<label for="old-password">Vecchia Password</label>
+								<label for="old-password">Password Attuale</label>
 								<input type="password" id="input--old-password" name="old-password">
 								
 								<label for="new-password">Nuova Password</label>
@@ -118,7 +118,7 @@
 							<p class="webdav--box" data-clipboard-text="https://fortelli.it/swap/webdav" title="Clicca per copiare negli appunti">https://fortelli.it/swap/webdav</p>
 							
 							<p class="webdav--description">Le credenziali di accesso a WebDAV sono:</p>
-							<p>Username: <span>filippo</p>
+							<p>Username: <span><?php echo $username; ?></p>
 							<p>Password: <span>La tua password</span></p>
 						</div>
 						
