@@ -13,7 +13,7 @@
 	$email = $_SESSION['email'];
 	$last_login = $_SESSION['last_login'];
 	
-	if(!$auth->getLoginStatus()) header('Location: /swap/login');
+	if(!$auth->getLoginStatus()) (isset($_GET['redirect']) && $_GET['redirect'] == "home") ? header('Location: /swap/#Home') :header('Location: /swap/login');
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,7 +123,7 @@
 						</div>
 						
 						<h2>Disconnetiti</h2>
-						<a href="?action=logout">Esci dal tuo account</a>
+						<a class="logout-button" href="?action=logout&redirect=home">Esci dal tuo account</a>
 					</div>
 				</div>
 			</div>
@@ -139,7 +139,9 @@
 			<script>
 				$(document).ready(function() {
 					Tippy('.webdav--box', {
-						size: 'small'
+						size: 'small',
+						theme: 'light',
+						position: 'right'
 					});
 					
 					var clipboard = new Clipboard('.webdav--box');
