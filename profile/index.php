@@ -44,6 +44,7 @@
 		<!-- Styles -->
 		<link href="../assets/css/styles.css" rel="stylesheet" />
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="https://unpkg.com/tippy.js/dist/tippy.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet" />
 	
 		<!--[if gte IE 9]>
@@ -99,6 +100,8 @@
 								<label for="new-password-2">Ripeti Password</label>
 								<input type="password" id="input--new-password-2" name="new-password-2">
 								
+								<input type="hidden" name="username" value="<?php echo $username; ?>">
+								
 								<input type="submit" id="input--submit" name="password-update" value="Modifica">
 							</form>
 						</div>
@@ -106,7 +109,7 @@
 						<div id="profile--webdav">
 							<h2>WebDAV</h2>
 							<p class="webdav--description">Puoi accedere a swap tramite WebDAV usando il seguente indirizzo:</p>
-							<p class="webdav--box">https://fortelli.it/swap/webdav/</p>
+							<p class="webdav--box" data-clipboard-text="https://fortelli.it/swap/webdav" title="Clicca per copiare negli appunti">https://fortelli.it/swap/webdav</p>
 							
 							<p class="webdav--description">Le credenziali di accesso a WebDAV sono:</p>
 							<p>Username: <span>filippo</p>
@@ -119,6 +122,28 @@
 			<footer>
 		        <p>Swap. Made with <i class="fa fa-heart"></i> by <a href="mailto:filippofortino@gmail.com">Filippo Fortino</a></p>
 			</footer>
+			
+			<!-- JavaScript -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+			<script src="https://unpkg.com/tippy.js/dist/tippy.min.js"></script>
+			<script src="../assets/js/clipboard.min.js"></script>
+			<script>
+				$(document).ready(function() {
+					Tippy('.webdav--box', {
+						size: 'small'
+					});
+					
+					var clipboard = new Clipboard('.webdav--box');
+
+					clipboard.on('success', function(e) {
+					    console.log(e);
+					    alert(e.text + " è stato copiato negli appunti.");
+					});
+					clipboard.on('error', function(e) {
+					    console.log(e);
+					});
+				});
+			</script>
 		</div>
 	</body>
 </html>
