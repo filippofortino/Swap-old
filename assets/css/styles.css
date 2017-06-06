@@ -602,7 +602,7 @@ div.authentication .form-container {
 	flex-direction: column;
 	align-items: center;
 }
-div.authentication #registration form #mobile-form {
+div.authentication #registration form#mobile-form {
 	display: none;
 }
 
@@ -724,13 +724,9 @@ p.box--success {
 	
 	/** Registration **/
 	div.authentication #form--register {
-		flex-direction: column;
-	}
-	div.authentication #registration form #field-separator--left,
-	div.authentication #registration form #field-separator--right {
 		display: none;
 	}
-	div.authentication #registration form #mobile-form {
+	div.authentication #registration form#mobile-form {
 		display: block;
 	}
 	div.authentication #registration form #input--submit {

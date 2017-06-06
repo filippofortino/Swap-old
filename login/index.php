@@ -115,7 +115,12 @@
 								<input type="text" id="input--last-name" name="last_name" tabindex="6">
 							</div>
 							
-							<div id="mobile-form">
+							<input type="submit" id="input--submit" name="register" value="Registrati">
+						</form>
+						
+						<!-- Form only displayed on moblile devices -->
+						<form id="mobile-form" name="register-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+							<div>
 								<label for="username">Username</label>
 								<input type="text" id="input--username" name="username" tabindex="1">
 								
@@ -133,7 +138,6 @@
 								
 								<label for="last-name">Cognome</label>
 								<input type="text" id="input--last-name" name="last_name" tabindex="6">
-								
 							</div>
 							<input type="submit" id="input--submit" name="register" value="Registrati">
 						</form>
