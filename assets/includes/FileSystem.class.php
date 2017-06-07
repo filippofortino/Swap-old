@@ -7,7 +7,6 @@
 		public function __construct() {
 			if(isset($_GET['delete'])) {
 				$this->deleteFile($_GET['delete']);
-				echo $response;
 			}
 		}
 		
