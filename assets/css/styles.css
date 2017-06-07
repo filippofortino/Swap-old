@@ -898,7 +898,7 @@ p.box--success {
 	z-index: 1;
 	box-sizing: border-box;
 	-webkit-transition: all .4s ease-in-out;
-	transition: all .4s ease-in-out;
+	/*transition: all .4s ease-in-out;*/
 	-webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
 	box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
 }
