@@ -92,6 +92,7 @@ $(function(){
 			
 			$.get("/swap/index.php" + delete_link);
 			
+			// Hide the element
 			parent.animate({ opacity: 0 }, 600, function() {
 				$(this).animate({
 					width: 0,
