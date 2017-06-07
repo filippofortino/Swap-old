@@ -194,7 +194,7 @@
 				<?php endif; ?>
 			</aside>
 			<div style="clear: both"></div>
-
+			
 			<?php echo ($auth->getLoginStatus()) ? "<ul class='data loggedin'></ul>" : "<ul class='data'></ul>"; ?>
 
 			<div class="nothingfound six">
