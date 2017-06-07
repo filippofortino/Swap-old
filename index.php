@@ -14,6 +14,7 @@
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/upload.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/Authentication.class.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/FileSystem.class.php';
 	
 	$auth = new Authentication();
 	
@@ -23,6 +24,10 @@
 	// Disable browser cache
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+	
+	if($auth->getLoginStatus()) {
+		$file_system = new FileSystem();
+	}
 	
 	/**
 	 * Create Folders
@@ -37,24 +42,6 @@
 				$feedback = "<p class='alert error'>Errore. Impossibile eliminare la cartella.</p>";
 			else
 				$feedback = "<p class='alert success'>Cartella creata correttamente!</p>";
-		} else
-			$feedback = "<p class='alert error'>Errore. Non disponi dei permessi necessari per eseguire questa operazione</p>";
-	}
-	
-	/**
-	 * Delete files
-	 */
-	if(isset($_GET['delete']) && isset($_GET['prev'])) {
-		if($auth->getLoginStatus()) {
-			$file = urldecode($_GET['delete']);
-			$prev = $_GET['prev'];
-			
-			if(!unlink($file))
-				$_SESSION['feedback'] = "<p class='alert error'>Errore. Impossibile eliminare il file.</p>";
-			else
-				$_SESSION['feedback'] = "<p class='alert success'>Il file è stato correttamente eliminato!</p>";
-			
-			header("Location: /swap/#$prev");
 		} else
 			$feedback = "<p class='alert error'>Errore. Non disponi dei permessi necessari per eseguire questa operazione</p>";
 	}
