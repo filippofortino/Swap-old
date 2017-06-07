@@ -12,6 +12,7 @@ $response = scan($dir);
 function scan($dir){
 
 	$files = array();
+	//$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
 	// Is there actually such a folder/file?
 
@@ -38,18 +39,19 @@ function scan($dir){
 			else {
 
 				// It is a file
-
 				$files[] = array(
 					"name" => $f,
 					"type" => "file",
 					"path" => $dir . '/' . $f,
-					"size" => filesize($dir . '/' . $f) // Gets the size of this file
+					"size" => filesize($dir . '/' . $f) // Gets the size of this file,
+					//"mime" => finfo_file($finfo, $dir . '/' . $f)
 				);
 			}
 		}
 	
 	}
-
+	
+	//finfo_close($finfo);
 	return $files;
 }
 
