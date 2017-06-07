@@ -78,6 +78,7 @@ $(function(){
 		offset: '50'
 	});
 	
+	// Delete folder animation
 	$('.filemanager').on('click', 'span.delete a', function(e) {
 		console.log("Delete");
 		
@@ -94,6 +95,7 @@ $(function(){
 			parent.animate({ opacity: 0 }, 600, function() {
 				$(this).animate({
 					width: 0,
+					height: 0,
 					margin: 0,
 					padding: 0
 				}, 300);
