@@ -161,7 +161,7 @@
 	                <input type="file" name="upl[]" id="file-uploader" multiple /><br />
 	                <ul id="files-list"></ul>
 	                <input type="submit" value="Carica" />
-	                <input type="hidden" class="dir" name="dir" value="" />
+	                <input type="hidden" class="dir" name="dir" value="Home" />
 				</form>
 				<?php if($auth->getLoginStatus()): ?>
 				<input type="checkbox" id="folder" name="check[1][]" />

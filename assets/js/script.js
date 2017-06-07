@@ -243,7 +243,7 @@ $(function(){
 			hash = decodeURIComponent(hash).slice(1).split('=');
 			
 			$('.button').attr("href", hash);
-			$('.dir').attr("value", hash);
+			(hash == "") ? $('.dir').attr("value", "Home") : $('.dir').attr("value", hash);
 			
 			if (hash.length) {
 				var rendered = '';
