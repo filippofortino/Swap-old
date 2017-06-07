@@ -78,6 +78,30 @@ $(function(){
 		offset: '50'
 	});
 	
+	$('.filemanager').on('click', 'span.delete a', function(e) {
+		console.log("Delete");
+		
+		// Get the 'li' element
+		parent = $(this).parent().parent().parent();
+		
+		//If user confirm the action
+		if(confirm("Sei sicuro di voler cancellare questo file?")) {
+			// Get the adelete link and perform the actual delete
+			delete_link = $(this).attr("href");
+			
+			$.get("/swap/index.php" + delete_link);
+			
+			parent.animate({ opacity: 0 }, 600, function() {
+				$(this).animate({
+					width: 0,
+					margin: 0,
+					padding: 0
+				}, 300);
+			});
+		}
+		
+		e.preventDefault();
+	});
 
 
 	$.get('scan.php', function(data) {
@@ -488,11 +512,6 @@ $(function(){
 			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
 			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 		}
-		
-		// Ask user confirmation before delete
-	    $('span.delete a').click(function(event) {
-		   if(!confirm("Sei sicuro di voler cancellare questo file?")) event.preventDefault(); 
-	    });
 		
 		//var pathname = $(location).attr('hash');
 		/*$('.button').attr("href", pathname);*/
