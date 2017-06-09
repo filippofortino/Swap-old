@@ -225,7 +225,7 @@
 			// Accessing global $realm value instead of local one
 			global $realm;
 			
-			$stmt = $this->db->prepare("SELECT username, email FROM swp_user_2 WHERE username = ? OR email = ?");
+			$stmt = $this->db->prepare("SELECT username, email FROM swp_user WHERE username = ? OR email = ?");
 			
 			$stmt->bind_param("ss", $username, $email);
 			$stmt->execute();
@@ -235,7 +235,7 @@
 				if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					if(strlen($username) <= 25) {
 						if($password == $password2) {
-							$stmt = $this->db->prepare("INSERT INTO swp_user_2 (username, password, digesta1, first_name, last_name, email) VALUES (?, ?, ?, ?, ?, ?)");
+							$stmt = $this->db->prepare("INSERT INTO swp_user (username, password, digesta1, first_name, last_name, email) VALUES (?, ?, ?, ?, ?, ?)");
 							$digesta1 = md5("$username:$realm:$password");
 							
 							$password = password_hash($password, PASSWORD_DEFAULT);
@@ -274,7 +274,7 @@
 		}
 		
 		private function confirmUser($email, $token) {
-			$stmt = $this->db->prepare("SELECT c.creation_date, u.active FROM swp_user_confirmation c, swp_user_2 u WHERE c.user_email = u.email AND c.user_email = ? AND c.token = ?");
+			$stmt = $this->db->prepare("SELECT c.creation_date, u.active FROM swp_user_confirmation c, swp_user u WHERE c.user_email = u.email AND c.user_email = ? AND c.token = ?");
 			$stmt->bind_param("ss", $email, $token);
 			$stmt->execute();
 			$stmt->bind_result($creation_date, $active);
@@ -285,7 +285,7 @@
 					if($differnce < 86400) {
 						$stmt->free_result();
 						
-						$query = "UPDATE swp_user_2 SET active = 1 WHERE email = '$email'";
+						$query = "UPDATE swp_user SET active = 1 WHERE email = '$email'";
 						if($this->db->query($query)) {
 							$this->success = "Il tuo account è stato attivato con successo";
 							$this->sendSuccessEmail($email);
@@ -322,7 +322,7 @@
 	
 		private function sendSuccessEmail($email) {
 			// Get the user first name
-			$stmt = $this->db->prepare("SELECT first_name FROM swp_user_2 WHERE email = ?");
+			$stmt = $this->db->prepare("SELECT first_name FROM swp_user WHERE email = ?");
 			$stmt->bind_param("s", $email);
 			$stmt->execute();
 			$stmt->bind_result($first_name);
