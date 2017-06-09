@@ -106,7 +106,6 @@ $(function(){
 		e.preventDefault();
 	});
 
-
 	$.get('scan.php', function(data) {
 
 		var response = [data],
