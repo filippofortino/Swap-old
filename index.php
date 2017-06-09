@@ -29,23 +29,6 @@
 		$file_system = new FileSystem();
 	}
 	
-	/**
-	 * Create Folders
-	 */
-	if(isset($_POST['create_folder'])) {
-		if($auth->getLoginStatus()) {
-			$folder_name = $_POST['folder_name'];
-			$path = $_POST['folder_path'] . "/$folder_name";
-			$recursive = boolval($_POST['recursive']);
-			
-			if(!(($recursive) ? mkdir($path, 0755, true) : mkdir($path, 0755)))
-				$feedback = "<p class='alert error'>Errore. Impossibile eliminare la cartella.</p>";
-			else
-				$feedback = "<p class='alert success'>Cartella creata correttamente!</p>";
-		} else
-			$feedback = "<p class='alert error'>Errore. Non disponi dei permessi necessari per eseguire questa operazione</p>";
-	}
-	
 // 	print_r($_SESSION);
 ?>
 <!DOCTYPE html>
