@@ -23,7 +23,7 @@
 			
 			$image = "../$name";
 		} else { // Profile picture handler
-			$image =  "../profile/pictures/default-avatar.jpg";
+			$image =  "../profile/pictures/$name.jpg";
 		}
 		
 		try {
