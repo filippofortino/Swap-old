@@ -24,12 +24,12 @@
 	}
 
 
-	require_once 'assets/includes/SimpleImage.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/SimpleImage.php';
 
 	// Store user alerts
 	//$feedback = "";
 
-	if(isset($_FILES['upl'])){
+	if(isset($_FILES['upl'])) {
 
 		$total = count($_FILES['upl']['name']);
 
