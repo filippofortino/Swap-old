@@ -424,6 +424,7 @@
 			        
 					if($stmt->execute()) {
 						$this->success[1] = "L'immagine è stata caricata con successo";
+						$_SESSION['avatar'] = $new_name;
 					}
 			    } catch(Exception $e) {
 				    $this->error[1] = $e->getMessage();
