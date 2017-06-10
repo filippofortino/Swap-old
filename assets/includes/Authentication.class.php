@@ -361,6 +361,10 @@
 				$this->changePassword($username, $old_password, $new_password, $new_password_2);
 			}
 			
+			if(isset($_FILES['profile'])) {
+				$this->uploadImage($_POST['username']);
+			}
+			
 		}
 		
 		private function changePassword($username, $old_password, $new_password, $new_password_2) {
@@ -388,17 +392,45 @@
 						$stmt->bind_param("sss", $new_password, $digesta1, $username);
 						
 						if($stmt->execute())
-							$this->success = "La tua password è stata correttamente modificata";
+							$this->success[0] = "La tua password è stata correttamente modificata";
 						else
-							$this->error = "Impossibile modificare la password";
+							$this->error[0] = "Impossibile modificare la password";
 					} else {
-						$this->error = "Le due password non corrispondono";
+						$this->error[0] = "Le due password non corrispondono";
 					}
 				} else {
-					$this->error = "La password inserita non è corretta";
+					$this->error[0] = "La password inserita non è corretta";
 				}
 			} else {
-				$this->error = "Compila tutti i campi";
+				$this->error[0] = "Compila tutti i campi";
+			}
+		}
+		
+		private function uploadImage($username) {
+			$allowed = array("jpg", "jpeg", "png", "gif");
+
+			$extension = pathinfo($_FILES['profile']['name'], PATHINFO_EXTENSION);
+			
+			if(in_array(strtolower($extension), $allowed)){
+			    $new_name = sha1(time() . sha1_file($_FILES['profile']['name']) . $username . random_int(0, 9999));
+			    
+			    try {
+				    // Convert image to jpg
+				    $img = new \claviska\SimpleImage();
+					$img->fromFile($_FILES['profile']['tmp_name'])->toFile("pictures/$new_name.jpg", "image/jpeg");
+					
+					$stmt = $this->db->prepare("UPDATE swp_user SET avatar = ? WHERE username = ?");
+			        $stmt->bind_param("ss", $new_name, $username);
+			        
+					if($stmt->execute()) {
+						$this->success[1] = "L'immagine è stata caricata con successo";
+					}
+			    } catch(Exception $e) {
+				    $this->error[1] = $e->getMessage();
+			    }
+			    
+			} else {
+			    $this->error[1] = "Il file selezionato non è un' immagine";
 			}
 		}
 		
