@@ -95,7 +95,7 @@
 								echo "<span id='no-profile-trigger' class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
 							} else {
 								$avatar = $_SESSION['avatar'];
-								echo "<span id='no-profile-trigger' class='no-profile-link'><img src='profile/pictures/$avatar' alt='User Profile Image'></span>";
+								echo "<span id='no-profile-trigger' class='no-profile-link'><img src='image/profile/50/$avatar/nocache' alt='User Profile Image'></span>";
 							}
 						} else {
 							echo "<a id='login-link' href='login/'><i class='fa fa-sign-in' aria-hidden='true'></i><span>Login</span></a>";
@@ -107,7 +107,7 @@
 									if(is_null($_SESSION['avatar'])) {
 										echo "<span class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
 									} else {
-										echo "<img src='profile/pictures/$avatar' alt='User Profile Image'>";
+										echo "<img src='image/profile/90/$avatar/nocache' alt='User Profile Image'>";
 									}
 								
 								?>
