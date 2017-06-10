@@ -1,5 +1,6 @@
 <?php
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/config.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/SimpleImage.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/swap/assets/includes/Authentication.class.php';
 	
 	$auth = new Authentication();
@@ -65,7 +66,6 @@
 					<p>Share your files, <span>in a snap!</span></p>
 				</div>
 			</header>
-			
 			<div id="content" class="profile">
 				<div id="profile--image">
 					<?php
@@ -76,8 +76,20 @@
 							echo "<span id='no-profile-trigger' class='no-profile-link' data-letter='$letter' style='background-color: " . $_SESSION['user_color'] . ";'></span>";
 						} else {
 							$avatar = $_SESSION['avatar'];
-							echo "<img src='../profile/pictures/$avatar' alt='User Profile Image'>";
+							echo "<img src='../image/profile/150/$avatar/nocache' alt='User Profile Image'>";
 						}
+					?>
+					
+					<form id="image-upload" name="image-upload" method="post" action="" enctype="multipart/form-data">
+			            <p>Cambia immagine</p>
+			            <input type="file" id="input--file" name="profile" />
+			            <input type="hidden" name="username" value="<?php echo $username; ?>">
+			            <input type="submit" id="input--submit" value="Carica">
+			        </form>
+			        
+			        <?php 
+						if(isset($profile->error[1])) echo "<p class='box--alert box--error'>" . $profile->error[1] ."</p>"; 
+						if(isset($profile->success[1])) echo "<p class='box--alert box--success'>" . $profile->success[1] ."</p>";
 					?>
 				</div>
 				
@@ -94,8 +106,8 @@
 						<div id="profile--password-update">
 							<h2>Cambia Password</h2>
 							<?php 
-								if(isset($profile->error)) echo "<p class='box--alert box--error'>" . $profile->error ."</p>"; 
-								if(isset($profile->success)) echo "<p class='box--alert box--success'>" . $profile->success ."</p>";
+								if(isset($profile->error[0])) echo "<p class='box--alert box--error'>" . $profile->error[0] ."</p>"; 
+								if(isset($profile->success[0])) echo "<p class='box--alert box--success'>" . $profile->success[0] ."</p>";
 							?>
 							<form id="form--password-update" name="password-update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 								<label for="old-password">Password Attuale</label>
