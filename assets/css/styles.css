@@ -183,7 +183,6 @@ header .user--login img {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	border: 1px solid #d9dccd;
 }
 header .user--login span.no-profile-link {
 	position: relative;
@@ -301,7 +300,6 @@ header .user--login span.no-profile-link:after {
 	max-width: 90px;
 	max-height: 90px;
 	border-radius: 50%;
-	border: 1px solid #d9dccd;
 }
 /*
 .tippy-tooltip[data-template-id="#user-details-tooltip"] {
@@ -683,7 +681,6 @@ p.box--success {
 	max-width: 150px;
 	max-height: 150px;
 	border-radius: 50%;
-	border: 1px solid #d9dccd;
 }
 #profile--image form {
 	margin: 15px 0;
