@@ -448,7 +448,7 @@
 			
 			if($stmt->execute()) {
 				$this->success[1] = "L'immagine è stata correttamente rimossa";
-				$_SESSION['avatar'] = $new_name;
+				$_SESSION['avatar'] = null;
 			} else {
 				$this->error[1] = "Impossibile rimuovere l'immagine del profilo";
 			}
