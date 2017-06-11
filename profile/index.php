@@ -80,7 +80,7 @@
 						}
 					?>
 					
-					<form id="image-upload" name="image-upload" method="post" action="" enctype="multipart/form-data">
+					<form id="image-upload" name="image-upload" method="post" action="<? echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
 			            <p>Cambia immagine</p>
 			            <input type="file" id="input--file" name="profile" />
 			            <input type="hidden" name="username" value="<?php echo $username; ?>">
@@ -92,8 +92,12 @@
 						if(isset($profile->success[1])) echo "<p class='box--alert box--success'>" . $profile->success[1] ."</p>";
 					?>
 					
-					<h2>Rimuovi Immagine</h2>
-					<?php echo "<a href='?action=remove-image&username=$username'>Rimuovi la tua immagine</a>"; ?>
+					<?php 
+						if(!is_null($_SESSION['avatar'])) {
+							echo "<h2>Rimuovi Immagine</h2>";
+							echo "<a href='?action=remove-image&username=$username'>Rimuovi la tua immagine</a>"; 
+						}
+					?>
 				</div>
 				
 				<div id="profile--details">
