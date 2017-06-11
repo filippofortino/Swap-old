@@ -365,7 +365,7 @@
 				$this->uploadImage($_POST['username']);
 			}
 			
-			if(isset($_GET['action'] && $_GET['action'] == "remove-image")) {
+			if(isset($_GET['action']) && $_GET['action'] == "remove-image")) {
 				if($_GET['username'] == $_SESSION['username']) {
 					$this->removeImage($_GET['username']);
 				} else {
