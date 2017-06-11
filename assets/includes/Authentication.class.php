@@ -424,7 +424,7 @@
 			    try {
 				    // Convert image to jpg
 				    $img = new \claviska\SimpleImage();
-					$img->fromFile($_FILES['profile']['tmp_name'])->toFile("pictures/$new_name.jpg", "image/jpeg");
+					$img->fromFile($_FILES['profile']['tmp_name'])->autoOrient()->toFile("pictures/$new_name.jpg", "image/jpeg");
 					
 					$stmt = $this->db->prepare("UPDATE swp_user SET avatar = ? WHERE username = ?");
 			        $stmt->bind_param("ss", $new_name, $username);
@@ -442,9 +442,9 @@
 			}
 		}
 		
-		private function removeImage($username) {
+		private function removeImage($username, $avatar = null) {
 			$stmt = $this->db->prepare("UPDATE swp_user SET avatar = ? WHERE username = ?");
-			$stmt->bind_param("ss", "NULL", $username);
+			$stmt->bind_param("ss", $avatar, $username);
 			
 			if($stmt->execute()) {
 				$this->success[1] = "L'immagine è stata correttamente rimossa";
