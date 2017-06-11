@@ -91,6 +91,9 @@
 						if(isset($profile->error[1])) echo "<p class='box--alert box--error'>" . $profile->error[1] ."</p>"; 
 						if(isset($profile->success[1])) echo "<p class='box--alert box--success'>" . $profile->success[1] ."</p>";
 					?>
+					
+					<h2>Rimuovi Immagine</h2>
+					<?php echo "<a href='?action=remove-image&username=$username'>Rimuovi la tua immagine</a>"; ?>
 				</div>
 				
 				<div id="profile--details">
