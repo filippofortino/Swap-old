@@ -839,6 +839,18 @@ p.box--success {
 		margin-left: 0;
 		width: 300px;
 	}
+	
+	/** Profile **/
+	div.profile {
+		flex-direction: column;
+	}
+	#profile--details {
+		padding-left: 0;
+		padding-top: 25px;
+		border-left: none;
+		border-top: 2px solid #ecf0f1;
+	}
+	
 }
 
 @media all and (max-width: 420px) {
@@ -855,6 +867,14 @@ p.box--success {
 	}
 	div.authentication #login {
 		padding-right: 0;
+	}
+	
+	/** Profile **/
+	#profile--details form input {
+		width: 100%;
+	}
+	#profile--details #profile--webdav p.webdav--box {
+		display: block;
 	}
 }
 
