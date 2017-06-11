@@ -365,6 +365,13 @@
 				$this->uploadImage($_POST['username']);
 			}
 			
+			if(isset($_GET['action'] && $_GET['action'] == "remove-image")) {
+				if($_GET['username'] == $_SESSION['username']) {
+					$this->removeImage($_GET['username']);
+				} else {
+					$this->error[1] = "Impossibile rimuovere l'immagine del profilo";
+				}
+			}
 		}
 		
 		private function changePassword($username, $old_password, $new_password, $new_password_2) {
@@ -412,7 +419,7 @@
 			$extension = pathinfo($_FILES['profile']['name'], PATHINFO_EXTENSION);
 			
 			if(in_array(strtolower($extension), $allowed)){
-			    $new_name = sha1(time() . sha1_file($_FILES['profile']['name']) . $username . random_int(0, 9999));
+			    $new_name = sha1(time() . sha1_file($_FILES['profile']['tmp_name']) . $username . random_int(0, 9999));
 			    
 			    try {
 				    // Convert image to jpg
@@ -432,6 +439,18 @@
 			    
 			} else {
 			    $this->error[1] = "Il file selezionato non è un' immagine";
+			}
+		}
+		
+		private function removeImage($username) {
+			$stmt = $this->db->prepare("UPDATE swp_user SET avatar = ? WHERE username = ?");
+			$stmt->bind_param("ss", null, $username);
+			
+			if($stmt->execute()) {
+				$this->success[1] = "L'immagine è stata correttamente rimossa";
+				$_SESSION['avatar'] = $new_name;
+			} else {
+				$this->error[1] = "Impossibile rimuovere l'immagine del profilo";
 			}
 		}
 		
