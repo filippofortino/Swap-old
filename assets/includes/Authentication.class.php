@@ -365,7 +365,7 @@
 				$this->uploadImage($_POST['username']);
 			}
 			
-			if(isset($_GET['action']) && $_GET['action'] == "remove-image")) {
+			if(isset($_GET['action']) && $_GET['action'] == "remove-image") {
 				if($_GET['username'] == $_SESSION['username']) {
 					$this->removeImage($_GET['username']);
 				} else {
@@ -444,7 +444,7 @@
 		
 		private function removeImage($username) {
 			$stmt = $this->db->prepare("UPDATE swp_user SET avatar = ? WHERE username = ?");
-			$stmt->bind_param("ss", null, $username);
+			$stmt->bind_param("ss", "NULL", $username);
 			
 			if($stmt->execute()) {
 				$this->success[1] = "L'immagine è stata correttamente rimossa";
