@@ -608,6 +608,16 @@ div.authentication form label {
 div.authentication #login form input {
 	width: 300px;
 }
+div.authentication #login form label:last-of-type {
+	display: inline-block;
+}
+div.authentication #login form input#input--stay-logged-in {
+	-webkit-appearance: checkbox;
+	display: inline-block;
+	height: auto;
+	line-height: normal;
+	border-radius: 0;
+}
 div.authentication #registration form input {
 	width: 300px;
 }
