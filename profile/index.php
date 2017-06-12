@@ -14,7 +14,7 @@
 	$email = $_SESSION['email'];
 	$last_login = $_SESSION['last_login'];
 	
-	if(!$auth->getLoginStatus()) (isset($_GET['redirect']) && $_GET['redirect'] == "home") ? header('Location: /swap/#Home') :header('Location: /swap/login');
+	if(!$auth->getLoginStatus()) (isset($_GET['redirect']) && $_GET['redirect'] == "home") ? header('Location: /swap/#Home') : header('Location: /swap/login');
 ?>
 <!DOCTYPE html>
 <html>
