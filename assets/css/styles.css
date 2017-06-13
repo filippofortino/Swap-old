@@ -614,6 +614,7 @@ div.authentication #login form label:last-of-type {
 div.authentication #login form input#input--stay-logged-in {
 	-webkit-appearance: checkbox;
 	display: inline-block;
+	width: auto;
 	height: auto;
 	line-height: normal;
 	border-radius: 0;
@@ -882,6 +883,9 @@ p.box--success {
 	/** Profile **/
 	#profile--details form input {
 		width: 100%;
+	}
+	div.authentication #login form input#input--stay-logged-in {
+		width: auto !important;
 	}
 	#profile--details #profile--webdav p.webdav--box {
 		display: block;
