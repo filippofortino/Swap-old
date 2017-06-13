@@ -63,6 +63,24 @@
 				</div>
 			</header>
 			
+			<?php if(isset($_GET['action']) && $_GET['action'] == "reset_password") : ?>
+				<div id="content" class="authentication password-reset">
+					<h1>Resetta la password</h1>
+					<form id="form--password-reset" name="password-reset-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+						
+						<label for="password">Nuova Password</label>
+						<input type="password" id="input--password" name="password">
+						
+						<label for="password">Ripeti Password</label>
+						<input type="password" id="input--password" name="password2">
+						
+						<input type="hidden" name="email" value="<?php echo $_GET['email']; ?>">
+						<input type="hidden" name="token" value="<?php echo $_GET['token']; ?>">
+						
+						<input type="submit" id="input--submit" name="reset_password" value="Reimposta">
+					</form>
+				</div>
+			<?php else: ?>
 			<div id="content" class="authentication">
 				<div id="login">
 					<h1>Accedi</h1>
@@ -144,12 +162,11 @@
 							</div>
 							<input type="submit" id="input--submit" name="register" value="Registrati">
 						</form>
-						
-						
 					</div>
 				</div>
 			</div>
 			
+			<?php endif; ?>
 			<footer>
 		        <p>Swap. Made with <i class="fa fa-heart"></i> by <a href="mailto:filippofortino@gmail.com">Filippo Fortino</a></p>
 			</footer>
