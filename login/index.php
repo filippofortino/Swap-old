@@ -4,6 +4,7 @@
 	
 	$auth = new Authentication();
 	$register = new Registration();
+	$profile = new UserProfileHandler();
 	
 	$get_email = "";
 	
@@ -63,10 +64,14 @@
 				</div>
 			</header>
 			
-			<?php if(isset($_GET['action']) && $_GET['action'] == "reset_password") : ?>
+			<?php if(isset($_GET['action']) && $_GET['action'] == "password_reset") : ?>
 				<div id="content" class="authentication password-reset">
+					<?php 
+						if(isset($profile->error)) echo "<p class='box--alert box--error'>" . $profile->error[2] ."</p>"; 
+						if(isset($profile->success)) echo "<p class='box--alert box--success'>" . $profile->success[2] ."</p>";
+					?>
 					<h1>Resetta la password</h1>
-					<form id="form--password-reset" name="password-reset-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+					<form id="form--password-reset" name="password-reset-form" action="" method="post">
 						
 						<label for="password">Nuova Password</label>
 						<input type="password" id="input--password" name="password">
@@ -77,7 +82,22 @@
 						<input type="hidden" name="email" value="<?php echo $_GET['email']; ?>">
 						<input type="hidden" name="token" value="<?php echo $_GET['token']; ?>">
 						
-						<input type="submit" id="input--submit" name="reset_password" value="Reimposta">
+						<input type="submit" id="input--submit" name="password_reset" value="Reimposta">
+					</form>
+				</div>
+			<?php elseif(isset($_GET['action']) && $_GET['action'] == "password_reset_email"): ?>
+				<div id="content" class="authentication password-reset">
+					<?php 
+						if(isset($profile->error)) echo "<p class='box--alert box--error'>" . $profile->error[2] ."</p>"; 
+						if(isset($profile->success)) echo "<p class='box--alert box--success'>" . $profile->success[2] ."</p>";
+					?>
+					<h1>Resetta la password</h1>
+					<form id="form--password-reset-email" name="password-reset-email-form" action="" method="post">
+						
+						<label for="email">Email</label>
+						<input type="text" id="input--text" name="email">
+						
+						<input type="submit" id="input--submit" name="password_reset_email" value="Avanti">
 					</form>
 				</div>
 			<?php else: ?>
@@ -100,6 +120,8 @@
 							
 							<label for="stay-logged-in">Rimani connesso</label>
 							<input type="checkbox" id="input--stay-logged-in" name="stay-logged-in" checked>
+							
+							<a href="?action=password_reset_email">Password dimenticata?</a>
 							
 							<input type="submit" id="input--submit" name="login" value="Accedi">
 						</form>
