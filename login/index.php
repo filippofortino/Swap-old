@@ -81,7 +81,7 @@
 							<input type="password" id="input--password" name="password">
 							
 							<label for="stay-logged-in">Rimani connesso</label>
-							<input type="checkbox" id="input--stay-logged-in" name="stay-logged-in">
+							<input type="checkbox" id="input--stay-logged-in" name="stay-logged-in" checked>
 							
 							<input type="submit" id="input--submit" name="login" value="Accedi">
 						</form>
