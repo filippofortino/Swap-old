@@ -121,7 +121,7 @@
 							<label for="stay-logged-in">Rimani connesso</label>
 							<input type="checkbox" id="input--stay-logged-in" name="stay-logged-in" checked>
 							
-							<a href="?action=password_reset_email">Password dimenticata?</a>
+							<a href="?action=password_reset_email"><i class="fa fa-info-circle" aria-hidden="true"></i>Password dimenticata?</a>
 							
 							<input type="submit" id="input--submit" name="login" value="Accedi">
 						</form>
