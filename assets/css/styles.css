@@ -631,6 +631,9 @@ div.authentication #login form a {
 div.authentication #login form a:hover {
 	color: #2980b9;
 }
+div.authentication #login form a i {
+	margin-right: 3px;
+}
 div.authentication #registration form input {
 	width: 300px;
 }
