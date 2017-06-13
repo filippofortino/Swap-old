@@ -453,6 +453,21 @@
 					$this->error[1] = "Impossibile rimuovere l'immagine del profilo";
 				}
 			}
+			
+			if(isset($_POST['password-reset-email'])) {
+				$email = $_POST['email'];
+				
+				$this->generatePasswordResetToken($email);
+			}
+			
+			if(isset($_POST['password-reset'])) {
+				$email = $_POST['email'];
+				$token = $_POST['token'];
+				$new_password = $_POST['password'];
+				$new_password_2 = $_POST['password2'];
+				
+				$this->resetPassword($email, $token, $new_password, $new_password_2);
+			}
 		}
 		
 		private function changePassword($username, $old_password, $new_password, $new_password_2) {
@@ -491,6 +506,50 @@
 				}
 			} else {
 				$this->error[0] = "Compila tutti i campi";
+			}
+		}
+		
+		private function generatePasswordResetToken($email) {
+			$stmt = $this->db->prepare("SELECT email FROM swp_user WHERE email = ?");
+			$stmt->bind_param("s", $email);
+			if($stmt->execute()) {
+				if($stmt->fetch() != NULL) {
+					$stmt->free_result();
+					
+					$stmt = $this->db->prepare("INSERT INTO swp_password_reset_tokens (user_email, token, creation_date) VALUES (?, ?, CURRENT_TIMESTAMP)");
+					$token = bin2hex(random_bytes(20));
+					$stmt->bind_param("ss", $email, $token);
+					if($stmt->execute()) {
+						if($this->sendPasswordResetEmail($email, $token))
+							$this->success[2] = "Email correttamente inviata";
+					}
+				}
+			}
+		}
+		
+		private function resetPassword($email, $token, $new_password, $new_password_2) {
+			$new_password = filter_var($new_password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$new_password_2 = filter_var($new_password_2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			
+			$stmt = $this->db->prepare("SELECT user.username, prt.token, prt.creation_date FROM swp_password_reset_tokens prt, swp_user user WHERE prt.user_email = user.email AND prt.user_email = ?");
+			$stmt->bind_param("s", $email);
+			if($stmt->execute()) {
+				$stmt->bind_result($username, $db_token, $creation_date);
+				$stmt->fetch();
+				$stmt->free_result();
+				
+				$differnce = time() - strtotime($creation_date);
+				if($differnce < 86400 && $token == $db_token && $new_password == $new_password_2) {
+					// Accessing global $realm value instead of local one
+					global $realm;
+					
+					$digesta1 = md5("$username:$realm:$new_password");
+					$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+					
+					$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE email = ?");
+					$stmt->bind_param("sss", $new_password, $digesta1, $email);
+				}
+				
 			}
 		}
 		
@@ -533,6 +592,24 @@
 			} else {
 				$this->error[1] = "Impossibile rimuovere l'immagine del profilo";
 			}
+		}
+		
+		private function sendPasswordResetEmail($email, $token) {
+			$subject = "Swap - Reset della Password";
+			
+			$headers = "From: admin@fortelli.it Swap\r\n";
+			$headers .= "Reply-To: admin@fortelli.it\r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			
+			$reset_url = "https://fortelli.it/swap/login/?action=password_reset&email=$email&token=$token";
+			
+			$content = "Il link per il reset della password é: $reset_url";
+			
+			if(mail($email, $subject, $content, $headers)) 
+				return true;
+			else 
+				return false;
 		}
 		
 	}
