@@ -110,15 +110,23 @@
 		 */
 		private function checkPasswordAndLogin() {
 			//$sql = "SELECT * FROM `swp_user` WHERE 1";
-			$stmt = $this->db->prepare("SELECT username, password, first_name, last_name, email, avatar, last_login, active FROM swp_user WHERE username = ? OR email = ?");
+			$stmt = $this->db->prepare("SELECT id, username, password, first_name, last_name, email, avatar, last_login, active FROM swp_user WHERE username = ? OR email = ?");
 			
 			$stmt->bind_param("ss", $_POST['username'], $_POST['username']);
 			$stmt->execute();
-			$stmt->bind_result($user, $pass, $first_name, $last_name, $email, $avatar, $last_login, $active);
+			$stmt->bind_result($id, $user, $pass, $first_name, $last_name, $email, $avatar, $last_login, $active);
+			$stmt->store_result();
 			
 			if($stmt->fetch() != NULL)
 				if(password_verify($_POST['password'], $pass)) {
 					if(boolval($active)) {
+						if(isset($_POST['stay-logged-in'])) {
+							if(!$this->stayLoggedIn($id)) {
+								$this->error = "Impossibile rimanere loggati";
+							}
+						}
+						
+						$_SESSION['user_id'] = $id;
 						$_SESSION['username'] = $user;
 						$_SESSION['first_name'] = $first_name;
 						$_SESSION['last_name'] = $last_name;
@@ -167,6 +175,7 @@
 		 * Do the logout.
 		 */
 		private function logout() {
+			$this->unsetCookie();
 			$_SESSION = array();
 			session_destroy();
 			$this->user_is_logged_in = false;
@@ -186,6 +195,78 @@
 				$this->loginSessionData();
 			elseif(isset($_POST['login']))
 				$this->loginPostData();
+			elseif(isset($_COOKIE['swap_stay_logged_in']))
+				$this->loginCookie();
+		}
+		
+		private function stayLoggedIn($user_id) {
+			$stmt = $this->db->prepare("INSERT INTO swp_auth_tokens (selector, validator, user_id, expires) VALUES (?, ?, ?, ?)");
+			
+			$selector = uniqid();
+			$validator = bin2hex(random_bytes(32));
+			$hashed_validator = hash("sha256", $validator);
+			$expires = strtotime("+30 days");
+			$db_expires = date("Y-m-d H:i:s", $expires);
+			
+			$stmt->bind_param("ssss", $selector, $hashed_validator, $user_id, $db_expires);
+			
+			if($stmt->execute()) {
+				setcookie("swap_stay_logged_in", "$selector:$validator", $expires, "/swap/");
+				return true;
+			}
+			
+			return false;
+		}
+		
+		private function loginCookie() {
+			list($selector, $validator) = explode(":", $_COOKIE['swap_stay_logged_in']);
+			$stmt = $this->db->prepare("SELECT validator, user_id FROM swp_auth_tokens WHERE selector = ?");
+			$stmt->bind_param("s", $selector);
+			if($stmt->execute()) {
+				$stmt->bind_result($hashed_validator, $user_id);
+				$stmt->store_result();
+				
+				if($stmt->fetch() != NULL) {
+					if(hash_equals($hashed_validator, hash("sha256", $validator))) {
+						$stmt = $this->db->prepare("SELECT id, username, first_name, last_name, email, avatar, last_login FROM swp_user WHERE id = ?");
+						$stmt->bind_param("s", $user_id);
+						$stmt->bind_result($id, $user, $first_name, $last_name, $email, $avatar, $last_login);
+						$stmt->store_result();
+						
+						if($stmt->execute()) {
+							if($stmt->fetch() != NULL) {
+								
+								$_SESSION['user_id'] = $id;
+								$_SESSION['username'] = $user;
+								$_SESSION['first_name'] = $first_name;
+								$_SESSION['last_name'] = $last_name;
+								$_SESSION['email'] = $email;
+								$_SESSION['avatar'] = $avatar;
+								$_SESSION['last_login'] = $last_login;
+								
+								$_SESSION['user_is_logged_in'] = true;
+								$this->user_is_logged_in = true;
+								
+								$stmt->free_result();
+								
+								// Insert last login date into the database
+								$stmt = $this->db->prepare("UPDATE swp_user SET last_login = CURRENT_TIMESTAMP WHERE username = ?");
+								$stmt->bind_param("s", $user);
+								$stmt->execute();
+							} else echo "Utente non trovato";
+						} else echo "Query user non ok";
+					} else echo "Hash non uguali";
+				} else echo "Nessuna corrispondenza";
+			} else echo "Errore nella query";
+		}
+		
+		protected function unsetCookie() {
+			if(isset($_COOKIE['swap_stay_logged_in'])) {
+				setcookie("swap_stay_logged_in", "$selector:$validator", 1, "/swap/");
+				$stmt = $this->db->prepare("DELETE FROM swp_auth_tokens WHERE user_id = ?");
+				$stmt->bind_param("s", $_SESSION['user_id']);
+				$stmt->execute();
+			}
 		}
 	}
 	
