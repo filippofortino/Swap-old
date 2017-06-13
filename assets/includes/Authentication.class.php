@@ -92,7 +92,7 @@
 			if(!empty($_POST['username']) && !empty($_POST['password']))
 				return true;
 			elseif(empty($_POST['username']) && empty($_POST['password']))
-				$this->error = "Compila i campi";
+				$this->error = "Compila tutti i campi";
 			elseif(empty($_POST['username']))
 				$this->error = "Inserisci il nome utente!";
 			elseif(empty($_POST['password']))
@@ -494,15 +494,16 @@
 						$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE username = ?");
 						$stmt->bind_param("sss", $new_password, $digesta1, $username);
 						
-						if($stmt->execute())
+						if($stmt->execute()) {
 							$this->success[0] = "La tua password è stata correttamente modificata";
-						else
+							$this->unsetCookie();
+						} else
 							$this->error[0] = "Impossibile modificare la password";
 					} else {
 						$this->error[0] = "Le due password non corrispondono";
 					}
 				} else {
-					$this->error[0] = "La password inserita non è corretta";
+					$this->error[0] = "La password attuale non è corretta";
 				}
 			} else {
 				$this->error[0] = "Compila tutti i campi";
@@ -510,55 +511,62 @@
 		}
 		
 		private function generatePasswordResetToken($email) {
-			$stmt = $this->db->prepare("SELECT email FROM swp_user WHERE email = ?");
-			$stmt->bind_param("s", $email);
-			if($stmt->execute()) {
-				if($stmt->fetch() != NULL) {
-					$stmt->free_result();
-					
-					$stmt = $this->db->prepare("INSERT INTO swp_password_reset_tokens (user_email, token, creation_date) VALUES (?, ?, CURRENT_TIMESTAMP)");
-					$token = bin2hex(random_bytes(20));
-					$stmt->bind_param("ss", $email, $token);
-					if($stmt->execute())
-						$this->sendPasswordResetEmail($email, $token);
-				}
-			}
-			$this->success[2] = "Una mail con il link per reimpostare la password è stata inviata a: $email";
+			if(!empty($email)) {
+				if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					$stmt = $this->db->prepare("SELECT email FROM swp_user WHERE email = ?");
+					$stmt->bind_param("s", $email);
+					if($stmt->execute()) {
+						if($stmt->fetch() != NULL) {
+							$stmt->free_result();
+							
+							$stmt = $this->db->prepare("INSERT INTO swp_password_reset_tokens (user_email, token, creation_date) VALUES (?, ?, CURRENT_TIMESTAMP)");
+							$token = bin2hex(random_bytes(20));
+							$stmt->bind_param("ss", $email, $token);
+							if($stmt->execute())
+								$this->sendPasswordResetEmail($email, $token);
+						}
+					}
+					$this->success[2] = "Una mail con il link per reimpostare la password è stata inviata a: $email";
+				} else $this->error[2] = "La mail inserita non è valida";
+			} else $this->error[2] = "Compila il campo";
 		}
 		
 		private function resetPassword($email, $token, $new_password, $new_password_2) {
 			$new_password = filter_var($new_password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$new_password_2 = filter_var($new_password_2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			
-			$stmt = $this->db->prepare("SELECT user.username, prt.token, prt.creation_date FROM swp_password_reset_tokens prt, swp_user user WHERE prt.user_email = user.email AND prt.user_email = ?");
-			$stmt->bind_param("s", $email);
-			if($stmt->execute()) {
-				$stmt->bind_result($username, $db_token, $creation_date);
-				$stmt->fetch();
-				$stmt->free_result();
-				
-				$differnce = time() - strtotime($creation_date);
-				if($differnce < 86400) {
-					if($token == $db_token) {
-						if($new_password == $new_password_2) {
-							// Accessing global $realm value instead of local one
-							global $realm;
-							
-							$digesta1 = md5("$username:$realm:$new_password");
-							$new_password = password_hash($new_password, PASSWORD_DEFAULT);
-							
-							$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE email = ?");
-							$stmt->bind_param("sss", $new_password, $digesta1, $email);
-							if($stmt->execute()) {
-								$this->success[2] = "La password è stata correttamente reimpostata. Tra poco verrai reindirizzato alla pagina di login.";
-								header("refresh:5; url=?email=$email");
-							} else {
-								$this->error[2] = "Impossibile reimpostare la password";
-							}
-						} else $this->error[2] = "Le due password non corrispondono";
-					} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato";
-				} else $this->error[2] = "Impossibile reimpostare la password. Questo link è scaduto";
-			} else $this->error[2] = "Impossibile reimpostare la password";
+			if(!empty($new_password) && !empty($new_password_2)) {
+			
+				$stmt = $this->db->prepare("SELECT user.username, prt.token, prt.creation_date FROM swp_password_reset_tokens prt, swp_user user WHERE prt.user_email = user.email AND prt.user_email = ?");
+				$stmt->bind_param("s", $email);
+				if($stmt->execute()) {
+					$stmt->bind_result($username, $db_token, $creation_date);
+					$stmt->fetch();
+					$stmt->free_result();
+					
+					$differnce = time() - strtotime($creation_date);
+					if($differnce < 86400) {
+						if($token == $db_token) {
+							if($new_password == $new_password_2) {
+								// Accessing global $realm value instead of local one
+								global $realm;
+								
+								$digesta1 = md5("$username:$realm:$new_password");
+								$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+								
+								$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE email = ?");
+								$stmt->bind_param("sss", $new_password, $digesta1, $email);
+								if($stmt->execute()) {
+									$this->success[2] = "La password è stata correttamente reimpostata. Tra poco verrai reindirizzato alla pagina di login.";
+									header("refresh:5; url=?email=$email");
+								} else {
+									$this->error[2] = "Impossibile reimpostare la password";
+								}
+							} else $this->error[2] = "Le due password non corrispondono";
+						} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato";
+					} else $this->error[2] = "Impossibile reimpostare la password. Questo link è scaduto";
+				} else $this->error[2] = "Impossibile reimpostare la password";
+			} else $this->error[2] = "Compila tutti i campi";
 		}
 		
 		private function uploadImage($username) {
@@ -612,7 +620,7 @@
 			
 			$reset_url = "https://fortelli.it/swap/login/?action=password_reset&email=$email&token=$token";
 			
-			$content = "Il link per il reset della password é: $reset_url";
+			$content = '<!doctype html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head> <title></title> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <style type="text/css"> #outlook a{padding: 0;}.ReadMsgBody{width: 100%;}.ExternalClass{width: 100%;}.ExternalClass *{line-height: 100%;}body{margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table, td{border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;}img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}p{display: block; margin: 13px 0;}</style> <style type="text/css"> @media only screen and (max-width:480px){@-ms-viewport{width: 320px;}@viewport{width: 320px;}}</style><!--[if mso]><xml> <o:OfficeDocumentSettings> <o:AllowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings></xml><![endif]--><!--[if lte mso 11]><style type="text/css"> .outlook-group-fix{width:100% !important;}</style><![endif]--> <style type="text/css"> @font-face{font-family: "lovelo"; src: url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.eot"); src: url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.eot?#iefix") format("embedded-opentype"), url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.woff2") format("woff2"), url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.woff") format("woff"), url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.ttf") format("truetype"), url("https://fortelli.it/swap/assets/fonts/lovelo_black-webfont.svg#loveloblack") format("svg"); font-weight: normal; font-style: normal;}</style> <style type="text/css"> @media only screen and (min-width:480px){.mj-column-per-100{width: 100%!important;}.mj-column-px-450{width: 450px!important;}}</style></head><body style="background: #ecf0f1;"> <div class="mj-container" style="background-color:#ecf0f1;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="left" border="0"> <tbody> <tr> <td style="width:220px;"> <a href="#" target="_blank"><img alt="" title="" height="auto" src="https://fortelli.it/swap/assets/img/swap_logo_web_complete.png" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;" width="220"></a> </td></tr></tbody> </table> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:linear-gradient(135deg, #ee9b35 0%,#e7045a 100%);" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:450px;"><![endif]--> <div class="mj-column-px-450 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:25px;" align="center"> <div style="cursor:auto;color:#fff;font-family:lovelo;font-size:45px;line-height:45px;text-align:center;">Ciao!</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">La tua richiesta per il reset della password è andata a buon fine. Per reimpostarla fai click sul pulsante sotto.</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:20px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"> <tbody> <tr> <td style="border:none;border-radius:3px;color:#fff;cursor:auto;padding:10px 25px;" align="center" valign="middle" bgcolor="#074d7b"><a href="' . $reset_url . '" style="text-decoration:none;background:#074d7b;color:#fff;font-family:lovelo;font-size:30px;font-weight:normal;line-height:120%;text-transform:none;margin:0px;" target="_blank">Reimposta Password</a></td></tr></tbody> </table> </td></tr><tr> <td style="word-wrap:break-word;font-size:0px;"> <div style="font-size:1px;line-height:15px;white-space:nowrap;"> </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left"> <div style="cursor:auto;color:#fff;font-family:sans-serif;font-size:16px;line-height:22px;text-align:left;">Se il pulsante qui sopra non funziona copia ed incolla il seguente link nella barra deli indirizzi del browser per reimpostare la password</div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px;"> <div style="margin:0px auto;border-radius:3px;max-width:450px;background:#fff;" data-class=""> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;border-radius:3px;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:10px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:undefined;width:NaNpx;"><![endif]--> <div style="cursor:auto;color:#626262;font-family:sans-serif;font-size:16px;line-height:22px;text-align:center;"><a href="' . $reset_url . '">' . $reset_url . '</a></div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;"> <div style="font-size:1px;line-height:10px;white-space:nowrap;"> </div></td></tr><tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center"> <div style="cursor:auto;color:#fff;font-family:sans-serif;font-size:13px;line-height:22px;text-align:center;">Se non sei stato tu ad effettuare questa richiesta puoi semplicemente ignorare questa mail.</div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]--> <div style="margin:0px auto;max-width:600px;background:#fff;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#fff;" align="center" border="0"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:600px;"><![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center"> <div style="cursor:auto;color:#626262;font-family:sans-serif;font-size:11px;line-height:22px;text-align:center;">Il Team di Swap © 2017</div></td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </td></tr></tbody> </table> </div><!--[if mso | IE]> </td></tr></table><![endif]--> </div></body></html>';
 			
 			if(mail($email, $subject, $content, $headers)) 
 				return true;
