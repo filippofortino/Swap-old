@@ -618,6 +618,18 @@ div.authentication #login form input#input--stay-logged-in {
 	height: auto;
 	line-height: normal;
 	border-radius: 0;
+	margin-bottom: 10px;
+}
+div.authentication #login form a {
+	display: block;
+	font-size: .8em;
+	color: #3498db;
+	margin-bottom: 20px;
+	-webkit-transition: color .4s;
+	transition: color .4s;
+}
+div.authentication #login form a:hover {
+	color: #2980b9;
 }
 div.authentication #registration form input {
 	width: 300px;
