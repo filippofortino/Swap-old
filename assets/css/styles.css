@@ -639,6 +639,24 @@ div.authentication #registration form#mobile-form {
 	display: none;
 }
 
+/** Password Reset **/
+div.password-reset {
+	flex-direction: column;
+	width: 400px !important;
+}
+div.password-reset h1 {
+	font-size: 1.7em;
+	color: #7f8c8d;
+	margin-bottom: 25px;
+}
+div.password-reset form  {
+	display: flex;
+	flex-direction: column;
+}
+div.password-reset form #input--submit {
+	margin-bottom: 0;
+}
+
 /** Error Box **/
 p.box--alert {
 	padding: 10px 5px !important;
