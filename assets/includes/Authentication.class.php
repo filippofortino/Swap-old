@@ -219,6 +219,7 @@
 		}
 		
 		private function loginCookie() {
+			echo $_COOKIE['swap_stay_logged_in'];
 			list($selector, $validator) = explode(":", $_COOKIE['swap_stay_logged_in']);
 			$stmt = $this->db->prepare("SELECT validator, user_id FROM swp_auth_tokens WHERE selector = ?");
 			$stmt->bind_param("s", $selector);
@@ -263,9 +264,9 @@
 		protected function unsetCookie() {
 			if(isset($_COOKIE['swap_stay_logged_in'])) {
 				setcookie("swap_stay_logged_in", "$selector:$validator", 1, "/swap/");
-				$stmt = $this->db->prepare("DELETE FROM swp_auth_tokens WHERE user_id = ?");
+				/*$stmt = $this->db->prepare("DELETE FROM swp_auth_tokens WHERE user_id = ?");
 				$stmt->bind_param("s", $_SESSION['user_id']);
-				$stmt->execute();
+				$stmt->execute();*/
 			}
 		}
 	}
