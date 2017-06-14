@@ -219,7 +219,6 @@
 		}
 		
 		private function loginCookie() {
-			echo $_COOKIE['swap_stay_logged_in'];
 			list($selector, $validator) = explode(":", $_COOKIE['swap_stay_logged_in']);
 			$stmt = $this->db->prepare("SELECT validator, user_id FROM swp_auth_tokens WHERE selector = ?");
 			$stmt->bind_param("s", $selector);
