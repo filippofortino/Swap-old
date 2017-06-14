@@ -135,7 +135,7 @@
 						<div id="profile--webdav">
 							<h2>WebDAV</h2>
 							<p class="webdav--description">Puoi accedere a swap tramite WebDAV utilizzando il seguente indirizzo:</p>
-							<p class="webdav--box" data-clipboard-text="https://fortelli.it/swap/webdav" title="Clicca per copiare negli appunti">https://fortelli.it/swap/webdav</p>
+							<p class="webdav--box" data-clipboard-text="https://fortelli.it/swap/webdav/" title="Clicca per copiare negli appunti">https://fortelli.it/swap/webdav/</p>
 							
 							<p class="webdav--description">Le credenziali di accesso a WebDAV sono:</p>
 							<p>Username: <span><?php echo $username; ?></p>
