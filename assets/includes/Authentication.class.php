@@ -18,7 +18,7 @@
 	
 
 		/**
-		 * Construct of the class.
+		 * Constructor of the class.
 		 *
 		 * Launches when the class is called and basically
 		 * starts the application.
@@ -537,8 +537,8 @@
 			
 			if(!empty($new_password) && !empty($new_password_2)) {
 			
-				$stmt = $this->db->prepare("SELECT user.username, prt.token, prt.creation_date FROM swp_password_reset_tokens prt, swp_user user WHERE prt.user_email = user.email AND prt.user_email = ?");
-				$stmt->bind_param("s", $email);
+				$stmt = $this->db->prepare("SELECT user.username, prt.token, prt.creation_date FROM swp_password_reset_tokens prt, swp_user user WHERE prt.user_email = user.email AND prt.user_email = ? AND prt.token = ?");
+				$stmt->bind_param("ss", $email, $token);
 				if($stmt->execute()) {
 					$stmt->bind_result($username, $db_token, $creation_date);
 					$stmt->fetch();
@@ -546,26 +546,24 @@
 					
 					$differnce = time() - strtotime($creation_date);
 					if($differnce < 86400) {
-						if($token == $db_token) {
-							if($new_password == $new_password_2) {
-								// Accessing global $realm value instead of local one
-								global $realm;
-								
-								$digesta1 = md5("$username:$realm:$new_password");
-								$new_password = password_hash($new_password, PASSWORD_DEFAULT);
-								
-								$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE email = ?");
-								$stmt->bind_param("sss", $new_password, $digesta1, $email);
-								if($stmt->execute()) {
-									$this->success[2] = "La password è stata correttamente reimpostata. Tra poco verrai reindirizzato alla pagina di login.";
-									header("refresh:5; url=?email=$email");
-								} else {
-									$this->error[2] = "Impossibile reimpostare la password";
-								}
-							} else $this->error[2] = "Le due password non corrispondono";
-						} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato";
+						if($new_password == $new_password_2) {
+							// Accessing global $realm value instead of local one
+							global $realm;
+							
+							$digesta1 = md5("$username:$realm:$new_password");
+							$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+							
+							$stmt = $this->db->prepare("UPDATE swp_user SET password = ? , digesta1 = ? WHERE email = ?");
+							$stmt->bind_param("sss", $new_password, $digesta1, $email);
+							if($stmt->execute()) {
+								$this->success[2] = "La password è stata correttamente reimpostata. Tra poco verrai reindirizzato alla pagina di login.";
+								header("refresh:5; url=?email=$email");
+							} else {
+								$this->error[2] = "Impossibile reimpostare la password";
+							}
+						} else $this->error[2] = "Le due password non corrispondono";
 					} else $this->error[2] = "Impossibile reimpostare la password. Questo link è scaduto";
-				} else $this->error[2] = "Impossibile reimpostare la password";
+				} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato, potrebbe essere scaduto";
 			} else $this->error[2] = "Compila tutti i campi";
 		}
 		
