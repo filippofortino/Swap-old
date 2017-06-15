@@ -1,0 +1,91 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}*{-webkit-tap-highlight-color:rgba(0,0,0,0)}*,*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+
+@font-face {
+    font-family: 'lovelo';
+    src: url('../fonts/lovelo_black-webfont.eot');
+    src: url('../fonts/lovelo_black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lovelo_black-webfont.woff2') format('woff2'),
+         url('../fonts/lovelo_black-webfont.woff') format('woff'),
+         url('../fonts/lovelo_black-webfont.ttf') format('truetype'),
+         url('../fonts/lovelo_black-webfont.svg#loveloblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/** Header **/
+body {
+	background-color: #fdf6e3;
+}
+header {
+	background-color: #fff;
+	padding: 5px;
+}
+header a {
+	text-decoration: none;
+}
+header span {
+	font-size: 1.4em;
+	font-family: 'lovelo', sans-serif;
+	color: #08a2e9;
+}
+div#filename {
+	font-family: 'lovelo', sans-serif;
+	color: #e7045a;
+	font-size: 1.1em;
+	line-height: 35px;
+	/*background-color: #bdc3c7;*/
+	background-color: #d9dcdd;
+	-webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
+	box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
+	z-index: 999;
+}
+div#filename .arrow {
+	color:  #6a6a72;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 20px;
+	margin-left: 4px;
+}
+div#filename .arrow:last-of-type {
+	display: none;
+}
+header, div#filename {
+	padding-left: 25px;
+}
+
+/** Error Box **/
+#error {
+	font-family: 'lovelo', sans-serif;
+	display: flex; 
+	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+}
+#error p {
+	font-size: 1.2em;
+	text-align: center;
+	color: #34495e;
+}
+#error p:first-of-type {
+	font-size: 3.3em;
+}
+#error a {
+	display: block;
+	width: 150px;
+	font-size: 1.5em;
+	text-align: center;
+	color: #34495e;
+	margin: 25px auto;
+	padding: 10px;
+	border: 3px solid #34495e;
+	text-decoration: none;
+	-webkit-transition: background-color .6s, color .4s;
+	transition: background-color .6s, color .4s;
+}
+#error a:hover {
+	color: #fff;
+	background-color: #e74c3c;
+}

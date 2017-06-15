@@ -1,0 +1,6 @@
+RewriteEngine On
+
+#Swap Viewer URL beautify
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*) /swap/viewer/index.php?file=$1 [L,B]

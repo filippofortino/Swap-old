@@ -447,13 +447,14 @@ $(function(){
 						Image Preview (BETA)
 					****************************/
 					/** href="'+f.path+'" title="'+ f.path +'" **/
-					var on_the_fly = encodeURI('https://fortelli.it/swap/image/thumbnail/100/'+encodeURIComponent(f.path))+'/cache';
+					var on_the_fly = encodeURI('image/thumbnail/100/'+encodeURIComponent(f.path))+'/cache';
+					var swap_viewer = encodeURI('viewer/'+encodeURIComponent(f.path));
 					
 					if(fileType == "jpg" || fileType == "png" || fileType == "jpeg" || fileType == "gif")
 						icon = '<img class="icon img-preview" src="'+on_the_fly+'" alt='+name+'>';
 					else
 						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					var file = $('<li class="files"><div class="files"><span class="delete"><a href=?delete='+encodeURIComponent(f.path)+'&prev='+window.location.hash.slice(1)+'><i class="fa fa-trash-o"></i></a></span>'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span><span class="links"><a href="'+f.path+'" title="'+ f.path +'" target="_blank" class="viewfile">Visualizza</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></div></li>');
+					var file = $('<li class="files"><div class="files"><span class="delete"><a href=?delete='+encodeURIComponent(f.path)+'&prev='+window.location.hash.slice(1)+'><i class="fa fa-trash-o"></i></a></span>'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span><span class="links"><a href="'+swap_viewer+'" title="'+ f.path +'" target="_blank" class="viewfile">Visualizza</a> <a href="download.php?file='+encodeURIComponent(f.path)+'" class="downloadfile">Download</a></span></div></li>');
 					file.appendTo(fileList);
 				});
 
