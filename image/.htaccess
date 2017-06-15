@@ -1,0 +1,6 @@
+RewriteEngine On
+
+#Swap Image 'on-the-fly' rewrite
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/(.*)/(.*)/(.*) /swap/image/index.php?type=$1&size=$2&image=$3&cache=$4 [L,B]
