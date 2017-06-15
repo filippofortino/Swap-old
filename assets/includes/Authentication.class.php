@@ -262,9 +262,10 @@
 		
 		protected function unsetCookie() {
 			if(isset($_COOKIE['swap_stay_logged_in'])) {
-				setcookie("swap_stay_logged_in", "$selector:$validator", 1, "/swap/");
-				/*$stmt = $this->db->prepare("DELETE FROM swp_auth_tokens WHERE user_id = ?");
-				$stmt->bind_param("s", $_SESSION['user_id']);
+				//list($selector, $validator) = explode(":", $_COOKIE['swap_stay_logged_in']);
+				setcookie("swap_stay_logged_in", "NULL", 1, "/swap/");
+				/*$stmt = $this->db->prepare("DELETE FROM swp_auth_tokens WHERE user_id = ? AND selector = ?");
+				$stmt->bind_param("ss", $_SESSION['user_id'], $selector);
 				$stmt->execute();*/
 			}
 		}
@@ -562,8 +563,8 @@
 								$this->error[2] = "Impossibile reimpostare la password";
 							}
 						} else $this->error[2] = "Le due password non corrispondono";
-					} else $this->error[2] = "Impossibile reimpostare la password. Questo link è scaduto";
-				} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato, potrebbe essere scaduto";
+					} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato, potrebbe essere incorretto oppure è scaduto";
+				} else $this->error[2] = "Impossibile reimpostare la password. Questo link non è stato trovato, potrebbe essere incorretto oppure è scaduto";
 			} else $this->error[2] = "Compila tutti i campi";
 		}
 		
