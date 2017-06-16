@@ -141,7 +141,7 @@
 				<label for="upload" class="nav-button" id="upload-button"><i class="fa fa-arrow-up"></i>Upload</label>
 
 				<form class="nav-form" id="upload-form" method="post" action="" enctype="multipart/form-data">
-	                <input type="file" name="upl[]" id="file-uploader" multiple /><br />
+	                <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple><br />
 	                <ul id="files-list"></ul>
 	                <input type="submit" value="Carica" />
 	                <input type="hidden" class="dir" name="dir" value="Home" />
@@ -182,9 +182,24 @@
 
 	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="assets/js/jquery.ui.widget.js"></script>
+	<script src="assets/js/jquery.iframe-transport.js"></script>
+	<script src="assets/js/jquery.fileupload.js"></script>
 	<script src="assets/js/mousetrap.js"></script>
 	<script src="assets/js/jquery.stick-kit.min.js"></script>
 	<script src="https://unpkg.com/tippy.js/dist/tippy.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script>
+		$(function () {
+		    $('#fileupload').fileupload({
+		        dataType: 'json',
+		        done: function (e, data) {
+		            $.each(data.result.files, function (index, file) {
+		                $('<p/>').text(file.name).appendTo(document.body);
+		            });
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>
