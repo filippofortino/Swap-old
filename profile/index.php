@@ -46,7 +46,7 @@
 		<!-- Styles -->
 		<link href="../assets/css/styles.css" rel="stylesheet" />
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
-		<link href="https://unpkg.com/tippy.js/dist/tippy.css" rel="stylesheet">
+		<link href="https://unpkg.com/tippy.js@0.17.0/dist/tippy.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet" />
 	
 		<!--[if gte IE 9]>
@@ -154,7 +154,7 @@
 			
 			<!-- JavaScript -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-			<script src="https://unpkg.com/tippy.js/dist/tippy.min.js"></script>
+			<script src="https://unpkg.com/tippy.js@0.17.0/dist/tippy.min.js"></script>
 			<script src="../assets/js/clipboard.min.js"></script>
 			<script>
 				$(document).ready(function() {
