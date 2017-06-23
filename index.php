@@ -169,7 +169,7 @@
 
 			<div class="nothingfound six">
 				<div class="nofiles"></div>
-				<span>Nessun file.</span>
+				<span>Non ci sono file.</span>
 			</div>
 		</div>
 	</div>
