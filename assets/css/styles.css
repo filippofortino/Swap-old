@@ -726,12 +726,31 @@ p.box--success {
 	max-height: 150px;
 	border-radius: 50%;
 }
-#profile--image form {
+#profile--image h2 {
+	font-size: 1.2em;
+	color: #ee9b35;
 	margin: 15px 0;
+	padding-top: 10px;
+	border-top: 2px solid #ecf0f1;
 }
 #profile--image form #input--file {
 	display: block;
 	margin-bottom: 10px;
+}
+#profile--image .remove-image-button {
+	display: inline-block;
+	font-size: .7em;
+	text-decoration: none;
+	color: #e74c3c;
+	border: 2px solid #e74c3c;
+	padding: 8px;
+	border-radius: 3px;
+	-webkit-transition: background-color .4s, color .4s;
+	transition: background-color .4s, color .4s;
+}
+#profile--image .remove-image-button:hover {
+	background-color: #e74c3c;
+	color: #fff;
 }
 
 #profile--details {
