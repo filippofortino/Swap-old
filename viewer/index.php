@@ -44,6 +44,9 @@
 		<link href="../assets/css/swap-viewer.css" rel="stylesheet">
 		<link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../assets/css/prism.css" rel="stylesheet">
+		
+		<link rel="shortcut icon" href="/swap/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/swap/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<?php

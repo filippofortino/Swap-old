@@ -119,7 +119,9 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>No file found</title>
+		<title>No file found - Swap</title>
+		<link rel="shortcut icon" href="/swap/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/swap/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<h1>We're sorry but the file you requested couldn't be found on our servers.</h1>
