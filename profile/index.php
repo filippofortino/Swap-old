@@ -56,7 +56,9 @@
 				}
 			</style>
 		<![endif]-->
-	
+		
+		<link rel="shortcut icon" href="/swap/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/swap/favicon.ico" type="image/x-icon">
 	</head>
 	<body id="swap">
 		<div class="filemanager">
