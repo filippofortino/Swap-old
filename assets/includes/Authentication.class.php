@@ -182,11 +182,6 @@
 			$this->success = "Ti sei disconnesso";
 		}
 
-		private function test() {
-			$num = ""
-			
-		}
-
 		/**
 		 * Handle the login or logout process.
 		 * If the $_GET['action'] variable is set to
